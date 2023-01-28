@@ -6,9 +6,9 @@ import axios from '../api/axios';
 const LOGIN_URL = 'https://e-lawyer-server.onrender.com/user/login';
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
-    const userRef = useRef(null);
-    const errRef = useRef(null);
+    const { setAuth } = useContext(AuthContext)
+    const userRef = useRef();
+    const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -17,39 +17,42 @@ const Login = () => {
 
     useEffect(() => {
         userRef.current.focus();
-    }, []);
+    }, [])
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd]);
+    }, [user, pwd])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL, {
-                Username: user,
-                Password: pwd
-            });
-
-            const accessToken = response.data.accessToken;
-            const roles = response.data.roles;
+            const response = await axios.post(LOGIN_URL,
+                {
+                    Username: user,
+                    Password: pwd
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
             setSuccess(true);
         } catch (err) {
-            if (!err.response) {
+            if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response.status === 400) {
+            } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
-            } else if (err.response.status === 401) {
+            } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
             } else {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
         }
-    };
+    }
 
     return (
         <> {success ? (
@@ -63,8 +66,10 @@ const Login = () => {
             </section>
         ) : (
             <section>
+
                     <form onSubmit={handleSubmit}>
                         <h3>Conectare</h3>
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <label htmlFor="username" className="content">Username:</label>
                         <input
                             type="text"
