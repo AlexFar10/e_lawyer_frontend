@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
+import Form from "./Form";
 
 class Home extends Component {
     render() {
@@ -11,6 +12,7 @@ class Home extends Component {
                 <NavBar/>
                 <Header/>
                 <AboutUs/>
+                <Form/>
                 <Footer/>
 
             </>
