@@ -1,24 +1,28 @@
 import './css/style.css'
-import Login from "./components/Login";
-import Register from "./components/Register";
-
-const Form = () => {
-
+import {Link} from 'react-router-dom';
+const Form = ({login}) => {
 
     return (
         <>
             <section className="book" id="book">
-
                 <div className="row">
 
-                    <div className="image">
-                        <Login/>
-                    </div>
+<table>
+    <tbody>
+    <tr>
+        <td><Link to="/register" className="btn">
+            Register
+        </Link></td>
+        <td> <Link to="/login" className="btn">
+            Login
+        </Link></td>
+    </tr>
+    </tbody>
+</table>
 
-                    <Register/>
+
 
                 </div>
-
             </section>
         </>
     )

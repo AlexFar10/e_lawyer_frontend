@@ -3,19 +3,23 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import '../css/style.css'
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = 'https://e-lawyer-server.onrender.com/user/signup';
+import Login from "./Login";
+import {Link} from "react-router-dom";
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-={}|[\]\\;:'",.<>\/?]).{8,}$/;
+const REGISTER_URL = 'http://localhost:3000/user/signup';
+
+
 
 const Form = () => {
+
+
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [Email, setEmail] = useState('');
-
-    const [user, setUser] = useState('');
-    const [validName, setValidName] = useState(false);
-    const [userFocus, setUserFocus] = useState(false);
+    const [Name, setName] = useState('');
+    const [Surname, setSurname] = useState('');
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -33,31 +37,26 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
-
-    useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd])
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [Name,Surname, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
-        const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2) {
+        if ( !v2) {
             setErrMsg("Invalid Entry");
             return;
         }
         try {
             const response = await axios.post(REGISTER_URL,
                 {
-                    Username: user,
+                    Name: Name,
+                    Surname: Surname,
                     Email: Email,
                     Password: pwd
                 })
@@ -66,16 +65,19 @@ const Form = () => {
             console.log(response?.accessToken);
             console.log(JSON.stringify(response))
             setSuccess(true);
-            setUser('');
+            setName('');
+            setSurname('');
             setEmail('');
             setPwd('');
             setMatchPwd('');
+
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
                 console.log(err)
             } else if (err.response?.status === 409) {
                 setErrMsg('Username Taken');
+                console.log(err)
             } else {
                 setErrMsg('Registration Failed')
                 console.log(err)
@@ -86,39 +88,44 @@ const Form = () => {
 
     return (
         <> {success ? (
-                    <section>
-                        <h1>Success!</h1>
+            <section className="book" id="book">
+                <div className="row">
+                        <Login/>
+                </div>
                     </section>
+
         ) : (
-            <section>
+            <section className="book" id="book">
+                <div className="row">
                     <form onSubmit={handleSubmit}>
                         <h3>Creare cont</h3>
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                        <label htmlFor="username">
-                            Username:
-                            <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+                        <label htmlFor="name">
+                            Name:
                         </label>
                         <input
                             type="text"
-                            id="username"
-                            ref={userRef}
+                            id="name"
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setName(e.target.value)}
+                            value={Name}
                             required
-                            aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
-                            onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
                          className="box"/>
-                        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
-                        </p>
-                        <label htmlFor="username">
+                        <label htmlFor="surname">
+                            Surname:
+                        </label>
+                        <input
+                            type="text"
+                            id="surname"
+                            autoComplete="off"
+                            onChange={(e) => setSurname(e.target.value)}
+                            value={Surname}
+                            required
+                            aria-describedby="uidnote"
+                            className="box"/>
+
+                        <label htmlFor="email">
                             Email:
                         </label>
                         <input
@@ -126,6 +133,7 @@ const Form = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete="off"
                             value={Email}
+                            ref={userRef}
                             required
                             className="box"/>
                         <label htmlFor="password">
@@ -146,7 +154,7 @@ const Form = () => {
                         className="box"/>
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 24 characters.<br />
+                            8 to 32 characters.<br />
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
@@ -172,10 +180,11 @@ const Form = () => {
                             Must match the first password input field.
                         </p>
                         <button className="btn" >Sign Up</button>
+
                     </form>
 
 
-
+                </div>
             </section>
 
             )}

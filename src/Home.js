@@ -4,6 +4,15 @@ import AboutUs from "./components/AboutUs";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
 import Form from "./Form";
+import {
+    BrowserRouter,
+    Routes, // instead of "Switch"
+    Route,
+} from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import UserData from "./components/UserData";
+import Pages from "./Pages";
 
 class Home extends Component {
     render() {
@@ -12,7 +21,13 @@ class Home extends Component {
                 <NavBar/>
                 <Header/>
                 <AboutUs/>
-                <Form/>
+                <BrowserRouter>
+                    <Routes>
+                <Route exact path="/" element={<Form/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/register" element={<Register/>} />
+            </Routes>
+    </BrowserRouter>
                 <Footer/>
 
             </>
