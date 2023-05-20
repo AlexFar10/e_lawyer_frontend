@@ -32,26 +32,24 @@ class ResetPwd extends Component {
     };
     render() {
         return (
+            <section className="book" id="book">
+                <div className="row">
             <form onSubmit={this.handleSubmit}>
                 <h3>Forgot Password</h3>
-                <div className="mb-3">
-                    <label>Email address</label>
+                    <label className="content">Email address</label>
                     <input
                         type="email"
                         className="form-control"
                         placeholder="Enter email"
                         onChange={this.handleEmailChange}
+                        className="box"
                     />
-                </div>
-                <div className="d-grid">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit"className="btn">
                         Submit
                     </button>
-                </div>
-                <p className="forgot-password text-right">
-                    <a href="/sign-up">Sign up</a>
-                </p>
             </form>
+                </div>
+            </section>
         );
     }
 }

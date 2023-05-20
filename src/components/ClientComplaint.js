@@ -1,8 +1,9 @@
 import "../css/style.css"
 import axios from "axios";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import ViewComplaint from "./ViewComplaint";
 import EditComplaint from "./EditComplaint";
+
 const UserData = (UserID) => {
     const [users, setUsers] = useState([]);
     const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -32,6 +33,7 @@ const UserData = (UserID) => {
                 console.log(error);
             });
     }, []);
+
     async function deleteUser(id) {
         try {
             await axios.delete(`http://localhost:3000/complaint/${id}`);
@@ -44,9 +46,9 @@ const UserData = (UserID) => {
     return (
         <section className="book" id="book">
             <div className="row">
-                <table >
+                <table>
                     <thead>
-                    <tr >
+                    <tr>
                         <th className="content"><h3>Titlu</h3></th>
                         <th className="content"><h3>Observatii</h3></th>
                         <th className="content"><h3>Status</h3></th>
@@ -56,7 +58,7 @@ const UserData = (UserID) => {
                     <tbody>
                     {users.map((user) => (
                         <tr key={user._id}>
-                            <td className="content"> <label>{user.Title}</label></td>
+                            <td className="content"><label>{user.Title}</label></td>
                             <td className="content"><label>{user.Observations}</label></td>
                             <td className="content"><label>{user.Status}</label></td>
                             <td className="content">

@@ -10,13 +10,19 @@ const Form = ({login}) => {
 <table>
     <tbody>
     <tr>
-        <td><Link to="/register" className="btn">
-            Register
+        <td rowSpan="2"><Link to="/register" className="btn">
+            Creare cont
         </Link></td>
-        <td> <Link to="/login" className="btn">
-            Login
+        <td><Link to="/login" className="btn">
+            Conectare
         </Link></td>
     </tr>
+    <tr>
+        <td><Link to="/reset" className="btn">
+            Resetare parola
+        </Link></td>
+    </tr>
+
     </tbody>
 </table>
 

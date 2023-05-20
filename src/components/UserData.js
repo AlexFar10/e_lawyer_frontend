@@ -1,7 +1,7 @@
 import "../css/style.css"
 import axios from "axios";
-import {useEffect, useState} from "react";
-
+import {useEffect, useRef, useState} from "react";
+import ReactPaginate from 'react-paginate';
 const UserData = () => {
     const [users, setUsers] = useState([]);
 
@@ -29,11 +29,11 @@ const UserData = () => {
                     <table >
                         <thead>
                         <tr >
-                            <th className="content"><h3>Name</h3></th>
-                            <th className="content"><h3>Surname</h3></th>
+                            <th className="content"><h3>Nume</h3></th>
+                            <th className="content"><h3>Prenume</h3></th>
                             <th className="content"><h3>Email</h3></th>
-                            <th className="content"><h3>Role</h3></th>
-                            <th className="content"><h3>Action</h3></th>
+                            <th className="content"><h3>Rol</h3></th>
+                            <th className="content"><h3>Sterge</h3></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,6 +50,7 @@ const UserData = () => {
                         ))}
                         </tbody>
                     </table>
+
                 </div>
             </section>
         )

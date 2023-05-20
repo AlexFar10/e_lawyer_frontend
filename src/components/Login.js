@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthProvider";
 import "../css/style.css";
 import axios from "../api/axios";
 import Pages from "../Pages";
-import {Link} from "react-router-dom";
+import jwtDecode from "jwt-decode";
 const LOGIN_URL = "http://localhost:3000/user/login";
 
 
@@ -16,7 +16,8 @@ const Login = () => {
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-    const [role, setRole] = useState("");
+    const [userRole, setRole] = useState("");
+    const [userId, setUserId] = useState("");
     useEffect(() => {
         userRef.current.focus();
     }, []);
@@ -39,15 +40,18 @@ const Login = () => {
                 Password: pwd,
             });
             console.log(JSON.stringify(response?.data));
-            console.log(response?.data)
-            const accessToken = response?.data?.accessToken;
-            const role = response?.data?.role;
-            console.log(role)
-            login(accessToken);
+            const accessToken = response?.data?.token;
+            const userId = response?.data?.id;
+            const userRole = response?.data?.role;
+
             setEmail("");
             setPwd("");
             setSuccess(true);
-            setRole(role)
+            setRole(userRole);
+            setUserId(userId);
+            login(accessToken, userId, userRole);
+            const decodedToken = jwtDecode(accessToken);
+
 
         } catch (err) {
             if (!err?.response) {
@@ -74,7 +78,7 @@ const Login = () => {
             {success ? (
                 <section className="book" id="book">
                     <div className="row">
-                    <Pages Role={role}/>
+                    <Pages Role={userRole} UserId={userId}/>
                     <button className="btn" onClick={handleLogout}>
                         LogOut
                     </button>

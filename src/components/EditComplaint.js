@@ -5,7 +5,7 @@ import {PayPalButtons, PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 const FORM_URL = 'http://localhost:3000/complaint';
 
-const FormComplaint = (user) => {
+const EditComplaint = (user) => {
 
 
         const errRef = useRef();
@@ -533,4 +533,4 @@ const FormComplaint = (user) => {
             </section>
         );
     };
-    export default FormComplaint;
+    export default EditComplaint;

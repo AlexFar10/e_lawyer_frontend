@@ -18,9 +18,7 @@ class Header extends Component {
                         <br/>Dacă da, ești pe pagina potrivită.
                         <br/><br/>Doar intră în cont, completează formularul, iar de restul ne ocupăm noi!</p>
 
-                        <div className="button">
-                            <a href="#" className="btn"> CONECTEAZĂ - TE !  </a>
-                        </div>
+
                     </div>
 
                 </section>
