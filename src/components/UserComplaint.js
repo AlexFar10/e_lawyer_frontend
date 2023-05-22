@@ -1,10 +1,11 @@
 import "../css/style.css"
 import axios from "axios";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import ViewComplaint from "./ViewComplaint";
 import EditComplaint from "./EditComplaint";
+
 const UserData = (UserID) => {
-    const [users, setUsers] = useState([]);
+    const [complaint, setComplaint] = useState([]);
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [isOpenView, setIsOpenView] = useState(false);
 
@@ -22,20 +23,20 @@ const UserData = (UserID) => {
     const handleCloseView = () => {
         setIsOpenView(false);
     };
-    console.log(UserID.userid)
     useEffect(() => {
         axios.get(`http://localhost:3000/complaint/userid/${UserID.userid}`)
             .then((response) => {
-                setUsers(response.data);
+                setComplaint(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
-    async function deleteUser(id) {
+
+    async function deleteComplaint(id) {
         try {
             await axios.delete(`http://localhost:3000/complaint/${id}`);
-            setUsers(users.filter((user) => user._id !== id));
+            setComplaint(complaint.filter((complaint) => complaint._id !== id));
         } catch (error) {
             console.log(error);
         }
@@ -44,9 +45,9 @@ const UserData = (UserID) => {
     return (
         <section className="book" id="book">
             <div className="row">
-                <table >
+                <table>
                     <thead>
-                    <tr >
+                    <tr>
                         <th className="content"><h3>Titlu</h3></th>
                         <th className="content"><h3>Observatii</h3></th>
                         <th className="content"><h3>Status</h3></th>
@@ -54,31 +55,31 @@ const UserData = (UserID) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {users.map((user) => (
-                        <tr key={user._id}>
-                            <td className="content"> <label>{user.Title}</label></td>
-                            <td className="content"><label>{user.Observations}</label></td>
-                            <td className="content"><label>{user.Status}</label></td>
+                    {complaint.map((complaint) => (
+                        <tr key={complaint._id}>
+                            <td className="content"><label>{complaint.Title}</label></td>
+                            <td className="content"><label>{complaint.Observations}</label></td>
+                            <td className="content"><label>{complaint.Status}</label></td>
                             <td className="content">
                                 <button className="btn" onClick={handleOpenEdit}>Editare</button>
                                 {isOpenEdit && (
                                     <div className="modal-overlay">
                                         <div className="modal-content">
-                                            <EditComplaint/>
+                                            <EditComplaint Id={complaint._id}/>
                                             <button onClick={handleCloseEdit}>Inchide</button>
                                         </div>
                                     </div>
                                 )}
-                                <button className="btn" onClick={handleOpenView}>Editare</button>
+                                <button className="btn" onClick={handleOpenView}>Vizualizare</button>
                                 {isOpenView && (
                                     <div className="modal-overlay">
                                         <div className="modal-content">
-                                            <ViewComplaint/>
+                                            <ViewComplaint id={complaint._id}/>
                                             <button onClick={handleCloseView}>Inchide</button>
                                         </div>
                                     </div>
                                 )}
-                                <button className="btn" onClick={() => deleteUser(user._id)}>Delete</button>
+                                <button className="btn" onClick={() => deleteComplaint(complaint._id)}>Delete</button>
                             </td>
                         </tr>
                     ))}

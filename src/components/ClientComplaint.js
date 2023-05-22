@@ -66,16 +66,16 @@ const UserData = (UserID) => {
                                 {isOpenEdit && (
                                     <div className="modal-overlay">
                                         <div className="modal-content">
-                                            <EditComplaint/>
+                                            <EditComplaint Id={user._id}/>
                                             <button onClick={handleCloseEdit}>Inchide</button>
                                         </div>
                                     </div>
                                 )}
-                                <button className="btn" onClick={handleOpenView}>Editare</button>
+                                <button className="btn" onClick={handleOpenView}>Cizualizare</button>
                                 {isOpenView && (
                                     <div className="modal-overlay">
                                         <div className="modal-content">
-                                            <ViewComplaint/>
+                                            <ViewComplaint id={user._id}/>
                                             <button onClick={handleCloseView}>Inchide</button>
                                         </div>
                                     </div>

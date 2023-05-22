@@ -1,17 +1,15 @@
-import { useRef, useState, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useEffect, useRef, useState} from "react";
+import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import '../css/style.css'
 import Login from "./Login";
-import {Link} from "react-router-dom";
+
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-={}|[\]\\;:'",.<>\/?]).{8,}$/;
 const REGISTER_URL = 'http://localhost:3000/user/signup';
 
 
-
 const Form = () => {
-
 
 
     const userRef = useRef();
@@ -43,12 +41,12 @@ const Form = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [Name,Surname, pwd, matchPwd])
+    }, [Name, Surname, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const v2 = PWD_REGEX.test(pwd);
-        if ( !v2) {
+        if (!v2) {
             setErrMsg("Invalid Entry");
             return;
         }
@@ -90,9 +88,9 @@ const Form = () => {
         <> {success ? (
             <section className="book" id="book">
                 <div className="row">
-                        <Login/>
+                    <Login/>
                 </div>
-                    </section>
+            </section>
 
         ) : (
             <section className="book" id="book">
@@ -111,7 +109,7 @@ const Form = () => {
                             value={Name}
                             required
                             aria-describedby="uidnote"
-                         className="box"/>
+                            className="box"/>
                         <label htmlFor="surname">
                             Surname:
                         </label>
@@ -138,8 +136,8 @@ const Form = () => {
                             className="box"/>
                         <label htmlFor="password">
                             Password:
-                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"}/>
+                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"}/>
                         </label>
                         <input
                             type="password"
@@ -151,17 +149,19 @@ const Form = () => {
                             aria-describedby="pwdnote"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
-                        className="box"/>
+                            className="box"/>
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 32 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                            <FontAwesomeIcon icon={faInfoCircle}/>
+                            8 to 32 characters.<br/>
+                            Must include uppercase and lowercase letters, a number and a special character.<br/>
+                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span
+                            aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span
+                            aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
                         <label htmlFor="confirm_pwd">
                             Confirm Password:
-                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"}/>
+                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"}/>
                         </label>
                         <input
                             type="password"
@@ -176,10 +176,10 @@ const Form = () => {
                             className="box"
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
+                            <FontAwesomeIcon icon={faInfoCircle}/>
                             Must match the first password input field.
                         </p>
-                        <button className="btn" >Sign Up</button>
+                        <button className="btn">Sign Up</button>
 
                     </form>
 
@@ -187,7 +187,7 @@ const Form = () => {
                 </div>
             </section>
 
-            )}
+        )}
         </>
     )
 }

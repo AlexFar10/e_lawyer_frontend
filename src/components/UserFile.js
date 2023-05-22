@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../css/style.css';
 
-const FileList = ({ User_Id }) => {
+const FileList = ({User_Id}) => {
     const [files, setFiles] = useState([]);
 
     useEffect(() => {

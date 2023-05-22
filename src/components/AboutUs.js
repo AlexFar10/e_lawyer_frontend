@@ -13,8 +13,8 @@ class AboutUs extends Component {
                     <div className="content">
                         <h3 className="heading">Despre noi </h3>
                         <p>Ai primit o amendă în trafic și consideri că ești neîndreptățit?
-                        <br/>Dacă da, ești pe pagina potrivită.
-                        <br/><br/>Doar intră în cont, completează formularul, iar de restul ne ocupăm noi!</p>
+                            <br/>Dacă da, ești pe pagina potrivită.
+                            <br/><br/>Doar intră în cont, completează formularul, iar de restul ne ocupăm noi!</p>
                     </div>
                 </section>
             </>

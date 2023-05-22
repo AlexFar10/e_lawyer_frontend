@@ -15,15 +15,15 @@ function App() {
 
     const postFiles = async (formdata) => {
 
-            axios
-                .post(`http://localhost:3000/file`, formdata)
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
+        axios
+            .post(`http://localhost:3000/file`, formdata)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <div>

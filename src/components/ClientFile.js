@@ -1,7 +1,7 @@
 import "../css/style.css"
 import axios from "axios";
-import {useEffect, useRef, useState} from "react";
-import ReactPaginate from 'react-paginate';
+import {useEffect, useState} from "react";
+
 const ClientFile = () => {
     const [users, setUsers] = useState([]);
 
@@ -14,6 +14,7 @@ const ClientFile = () => {
                 console.log(error);
             });
     }, []);
+
     async function deleteUser(id) {
         try {
             await axios.delete(`http://localhost:3000/user/${id}`);
@@ -26,9 +27,9 @@ const ClientFile = () => {
     return (
         <section className="book" id="book">
             <div className="row">
-                <table >
+                <table>
                     <thead>
-                    <tr >
+                    <tr>
                         <th className="content"><h3>Nume</h3></th>
                         <th className="content"><h3>Prenume</h3></th>
                         <th className="content"><h3>Email</h3></th>
@@ -39,7 +40,7 @@ const ClientFile = () => {
                     <tbody>
                     {users.map((user) => (
                         <tr key={user._id}>
-                            <td className="content"> <label>{user.Name}</label></td>
+                            <td className="content"><label>{user.Name}</label></td>
                             <td className="content"><label>{user.Surname}</label></td>
                             <td className="content"><label>{user.Email}</label></td>
                             <td className="content"><label>{user.Role}</label></td>

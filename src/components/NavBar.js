@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { GoLaw } from 'react-icons/go';
+import {GoLaw} from 'react-icons/go';
+
 class NavBar extends Component {
     render() {
         return (

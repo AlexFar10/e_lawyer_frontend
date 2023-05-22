@@ -9,7 +9,6 @@ class Footer extends Component {
                     <div className="box-container">
 
 
-
                         <div className="box">
                             <h3>Contact</h3>
                             <a href="#"> <i className="fas fa-phone"></i> +123-456-7890 </a>
@@ -25,7 +24,6 @@ class Footer extends Component {
                         </div>
 
                     </div>
-
 
 
                 </section>

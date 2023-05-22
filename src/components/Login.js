@@ -1,14 +1,15 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import AuthContext from "../context/AuthProvider";
 import "../css/style.css";
 import axios from "../api/axios";
 import Pages from "../Pages";
 import jwtDecode from "jwt-decode";
+
 const LOGIN_URL = "http://localhost:3000/user/login";
 
 
 const Login = () => {
-    const { login } = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -66,7 +67,7 @@ const Login = () => {
             errRef.current.focus();
         }
     };
-    const { logout } = useContext(AuthContext);
+    const {logout} = useContext(AuthContext);
 
     const handleLogout = () => {
         logout();
@@ -78,51 +79,51 @@ const Login = () => {
             {success ? (
                 <section className="book" id="book">
                     <div className="row">
-                    <Pages Role={userRole} UserId={userId}/>
-                    <button className="btn" onClick={handleLogout}>
-                        LogOut
-                    </button>
+                        <Pages Role={userRole} UserId={userId}/>
+                        <button className="btn" onClick={handleLogout}>
+                            LogOut
+                        </button>
                     </div>
                 </section>
             ) : (
                 <section className="book" id="book">
                     <div className="row">
-                    <form onSubmit={handleSubmit}>
-                        <h3>Conectare</h3>
-                        <p
-                            ref={errRef}
-                            className={errMsg ? "errmsg" : "offscreen"}
-                            aria-live="assertive"
-                        >
-                            {errMsg}
-                        </p>
-                        <label htmlFor="email" className="content">
-                            Email:
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                            className="box"
-                        />
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            className="box"
-                        />
-                        <button className="btn">Log In</button>
+                        <form onSubmit={handleSubmit}>
+                            <h3>Conectare</h3>
+                            <p
+                                ref={errRef}
+                                className={errMsg ? "errmsg" : "offscreen"}
+                                aria-live="assertive"
+                            >
+                                {errMsg}
+                            </p>
+                            <label htmlFor="email" className="content">
+                                Email:
+                            </label>
+                            <input
+                                type="text"
+                                id="username"
+                                ref={userRef}
+                                autoComplete="off"
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                required
+                                className="box"
+                            />
+                            <label htmlFor="password">Password:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                onChange={(e) => setPwd(e.target.value)}
+                                value={pwd}
+                                required
+                                className="box"
+                            />
+                            <button className="btn">Log In</button>
 
-                    </form>
+                        </form>
 
-                        </div>
+                    </div>
                 </section>
             )}
         </>

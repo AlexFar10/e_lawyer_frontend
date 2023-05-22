@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 function Documents() {
@@ -7,7 +7,7 @@ function Documents() {
     const [surname, setSurname] = useState("");
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
 
         if (name === "Name") {
             setName(value);
@@ -44,15 +44,15 @@ function Documents() {
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" name="Name" value={name} onChange={handleChange} />
+                    <input type="text" name="Name" value={name} onChange={handleChange}/>
                 </label>
-                <br />
+                <br/>
                 <label>
                     Surname:
-                    <input type="text" name="Surname" value={surname} onChange={handleChange} />
+                    <input type="text" name="Surname" value={surname} onChange={handleChange}/>
                 </label>
-                <br />
-                <input type="file" onChange={handleFileChange} multiple />
+                <br/>
+                <input type="file" onChange={handleFileChange} multiple/>
                 <button type="submit">Submit</button>
             </form>
         </div>

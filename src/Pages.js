@@ -1,14 +1,14 @@
 import './css/style.css'
-import { useState } from 'react'
+import {useState} from 'react'
 import FormComplaint from "./components/FormComplaint";
 import UserData from "./components/UserData";
 import FormFile from "./components/FormFile";
 import UserFile from "./components/UserFile";
 import ClientFile from "./components/ClientFile";
-import ViewComplaint from "./components/ViewComplaint";
 import UserComplaint from "./components/UserComplaint";
+import ClientComplaint from "./components/ClientComplaint";
 
-const Pages = ({Role,UserId}) => {
+const Pages = ({Role, UserId}) => {
     const [showComplaintForm, setShowComplaintForm] = useState(false);
     const [showFileForm, setShowFileForm] = useState(false);
     const [showUserFile, setShowUserFile] = useState(false);
@@ -40,7 +40,7 @@ const Pages = ({Role,UserId}) => {
         setShowUserData(prevState => !prevState);
     };
 
-    if(Role==='client')
+    if (Role === 'client')
         return (
             <>
                 <section className="book" id="book">
@@ -49,31 +49,31 @@ const Pages = ({Role,UserId}) => {
                         <button className="btn" onClick={handleComplainClick}>
                             {showComplaintForm ? "Inchidere formular contestatie" : "Deschidere formular contestatie"}
                         </button>
-                        {showComplaintForm && <FormComplaint user={UserId} />}
+                        {showComplaintForm && <FormComplaint user={UserId}/>}
                     </div>
                     <div className="row">
                         <button className="btn" onClick={handleFileClick}>
                             {showFileForm ? "Inchidere formular fisiere" : "Deschidere formular fisiere"}
                         </button>
-                        {showFileForm && <FormFile user_Id={UserId} />}
+                        {showFileForm && <FormFile user_Id={UserId}/>}
                     </div>
                     <div className="row">
                         <button className="btn" onClick={handleUserFileClick}>
                             {showUserFile ? "Inchide fisiere" : "Deschide fisiere"}
                         </button>
-                        {showUserFile && <UserFile User_Id={UserId} />}
+                        {showUserFile && <UserFile User_Id={UserId}/>}
                     </div>
                     <div className="row">
                         <button className="btn" onClick={handleUserComplaintClick}>
                             {showUserComplaint ? "Inchide contestatie" : "Deschide contestatie"}
                         </button>
-                        {showUserComplaint && <UserComplaint userid={UserId} />}
+                        {showUserComplaint && <UserComplaint userid={UserId}/>}
                     </div>
                 </section>
             </>
         )
 
-    if(Role==='lawyer')
+    if (Role === 'lawyer')
         return (
             <>
                 <section className="book" id="book">
@@ -81,7 +81,7 @@ const Pages = ({Role,UserId}) => {
                         <button className="btn" onClick={handleClientFileClick}>
                             {showClientFile ? "Inchide fisiere" : "Deschide fisiere"}
                         </button>
-                        {showClientFile && <ClientFile User_Id={UserId} />}
+                        {showClientFile && <ClientFile User_Id={UserId}/>}
                     </div>
                 </section>
                 <section className="book" id="book">
@@ -89,13 +89,13 @@ const Pages = ({Role,UserId}) => {
                         <button className="btn" onClick={handleClientComplaintClick}>
                             {showClientComplaint ? "Inchide fisiere" : "Deschide fisiere"}
                         </button>
-                        {showClientComplaint && <ClientComplaint UserId={UserId} />}
+                        {showClientComplaint && <ClientComplaint UserId={UserId}/>}
                     </div>
 
                 </section>
             </>
         )
-    else if(Role==='admin')
+    else if (Role === 'admin')
         return (
             <>
                 <section className="book" id="book">
@@ -104,7 +104,7 @@ const Pages = ({Role,UserId}) => {
                         <button className="btn" onClick={handleUserData}>
                             {showUserData ? "CloseUserData" : "UserData"}
                         </button>
-                        {showUserData && <UserData />}
+                        {showUserData && <UserData/>}
                     </div>
                 </section>
             </>

@@ -13,10 +13,10 @@ class Header extends Component {
                     </div>
 
                     <div className="content">
-                        <h2 className="heading"><span>Verdict:</span><br/>  amendă abuzivă </h2>
+                        <h2 className="heading"><span>Verdict:</span><br/> amendă abuzivă </h2>
                         <p>Ai primit o amendă în trafic și consideri că ești neîndreptățit?
-                        <br/>Dacă da, ești pe pagina potrivită.
-                        <br/><br/>Doar intră în cont, completează formularul, iar de restul ne ocupăm noi!</p>
+                            <br/>Dacă da, ești pe pagina potrivită.
+                            <br/><br/>Doar intră în cont, completează formularul, iar de restul ne ocupăm noi!</p>
 
 
                     </div>
