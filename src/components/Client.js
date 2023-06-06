@@ -38,7 +38,7 @@ const Client = ({UserID}) => {
                                     <td className="content"><label>{user.Name}</label></td>
                                     <td className="content"><label>{user.Surname}</label></td>
                                     <td className="content"><label>{user.Email}</label></td>
-                                    <td className="content">  <Link to={`/usercomplaint/${user._id}`} activeclassname="current"><button>Deschide</button></Link></td>
+                                    <td className="content">  <Link to={`/usercomplaint/${user.Email}`} activeclassname="current"><button className="btn">Deschide</button></Link></td>
                                 </tr>
                             );
                         }

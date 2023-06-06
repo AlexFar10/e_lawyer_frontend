@@ -13,6 +13,7 @@ import ViewComplaint from "./components/ViewComplaint";
 import NewPwd from "./components/NewPwd";
 import WordDoc from "./components/WordDoc";
 import Form from "./Form";
+import LawyerComplaint from "./components/LawyerComplaint";
 
 class Home extends Component {
     render() {
@@ -27,7 +28,7 @@ class Home extends Component {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/reset" element={<ResetPwd/>}/>
-                        <Route path="/usercomplaint/:userId" element={<ClientComplaint/>}/>
+                        <Route path="/usercomplaint/:email" element={<LawyerComplaint/>}/>
                         <Route path="/edit/:complaintId" element={<EditComplaint/>}/>
                         <Route path="/view/:complaintId" element={<ViewComplaint/>}/>
                         <Route path="/reset-password/:email/:token" element={<NewPwd/>}/>

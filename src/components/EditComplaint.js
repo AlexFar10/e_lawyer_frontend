@@ -5,7 +5,6 @@ import { useParams} from 'react-router-dom';
 const EditComplaint = () => {
     const [complaint, setComplaint] = useState({});
     const { complaintId } = useParams();
-console.log(complaintId)
     useEffect(() => {
         axios
             .get(`http://localhost:3000/complaint/id/${complaintId}`)
@@ -158,6 +157,7 @@ console.log(complaintId)
             setAccept('');
             setWitnessesData('');
             setPoliceAdr('');
+
 
         } catch (err) {
             if (!err?.response) {

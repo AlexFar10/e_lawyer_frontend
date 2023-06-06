@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import '../css/style.css';
 
 function NewPwd() {
     const [password, setPassword] = useState("");
@@ -25,34 +26,42 @@ function NewPwd() {
     };
 
     return (
+        <section className="book" id="book">
+            <div className="row">
         <form  onSubmit={handleSubmit}>
             <label className="content">Email address</label>
             <input
                 type="email"
-                className="form-control"
+
                 placeholder="Enter email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 className="box"
             />
+            <label className="content">Password</label>
             <input
                 type="password"
                 placeholder="New password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="box"
             />
+            <label className="content">Confirm Password</label>
             <input
                 type="password"
                 placeholder="Confirm new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                className="box"
             />
-            <button  type="submit">
+            <button  className="btn" type="submit">
                 Submit
             </button>
         </form>
+            </div>
+            </section>
     );
 }
 

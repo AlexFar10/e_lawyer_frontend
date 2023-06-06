@@ -2,14 +2,12 @@ import "../css/style.css"
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Link, useParams} from 'react-router-dom';
-const UserData = ({userid}) => {
-    const { userId } = useParams();
-    console.log(userId);
+const UserData = () => {
     const [complaint, setComplaint] = useState([]);
-
+    const { email } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/complaint/userid/${userid}`)
+        axios.get(`http://localhost:3000/complaint/useremail/${email}`)
             .then((response) => {
                 setComplaint(response.data);
 

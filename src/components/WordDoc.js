@@ -1,6 +1,7 @@
 import React from 'react';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import '../css/style.css';
 import {useEffect, useState} from 'react'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -94,7 +95,7 @@ const WordDoc = ({nume,
 
     return (
         <div className="App">
-            <button onClick={createPdf}>Generate PDF</button>
+            <button className="btn" onClick={createPdf}>Generate PDF</button>
             {url && (
                 <div>
                     {url}

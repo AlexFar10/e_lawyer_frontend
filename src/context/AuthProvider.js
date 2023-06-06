@@ -7,8 +7,11 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
-        if (token) {
-            setAuth({token});
+        const userId = localStorage.getItem("userId");
+        const userRole = localStorage.getItem("userRole");
+
+        if (token && userId && userRole) {
+            setAuth({ token, userId, userRole });
         }
     }, []);
 
