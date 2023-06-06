@@ -1,8 +1,10 @@
 import './css/style.css'
 import {Link} from 'react-router-dom';
+import WordDoc from "./components/WordDoc";
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import React, {useState} from "react";
 
 const Form = ({login}) => {
-
     return (
         <>
             <section className="book" id="book">

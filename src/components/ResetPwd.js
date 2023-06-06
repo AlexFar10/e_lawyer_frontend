@@ -1,61 +1,48 @@
-import React, {Component} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-class ResetPwd extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+const ResetPwd = () => {
+    const [resetEmail, setResetEmail] = useState("");
 
-    handleSubmit(e) {
+    const handlePasswordReset = async (e) => {
         e.preventDefault();
-        const email = this.state;
-        console.log(email);
-        fetch("http://localhost:3000/user/forgot-password", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify(email),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data, "userRegister");
-                alert(data.status);
-            });
-    }
 
-    handleEmailChange = (e) => {
-        this.setState({email: e.target.value});
+        try {
+            const response = await axios.post("http://localhost:3000/user/forgot-password", {
+                email: resetEmail,
+            });
+            if (response.data.success) {
+                alert("Please check your email for password reset link.");
+            } else {
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error:", error.response ? error.response.data : error);
+            alert("An error occurred. Please try again.");
+        }
     };
 
-    render() {
-        return (
-            <section className="book" id="book">
-                <div className="row">
-                    <form onSubmit={this.handleSubmit}>
-                        <h3>Forgot Password</h3>
-                        <label className="content">Email address</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            placeholder="Enter email"
-                            onChange={this.handleEmailChange}
-                            className="box"
-                        />
-                        <button type="submit" className="btn">
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </section>
-        );
-    }
-}
+    return (
+        <section className="book" id="book">
+            <div className="row">
+                <form onSubmit={handlePasswordReset}>
+                    <h3>Forgot Password</h3>
+                    <label className="content">Email address</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter email"
+                        onChange={(e) => setResetEmail(e.target.value)}
+                        value={resetEmail}
+                        className="box"
+                    />
+                    <button type="submit" className="btn">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </section>
+    );
+};
 
 export default ResetPwd;

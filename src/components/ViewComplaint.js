@@ -1,26 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/style.css";
-
-const ViewComplaint = (id) => {
+import { useParams} from 'react-router-dom';
+import WordDoc from "./WordDoc";
+const ViewComplaint = () => { // Destructure id from props
     const [Complaint, setComplaint] = useState([]);
-
+    const { complaintId } = useParams();
     useEffect(() => {
-        axios
-            .get(`http://localhost:3000/complaint/id/${id}`)
-            .then((response) => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/complaint/id/${complaintId}`);
                 setComplaint(response.data);
-
-            })
-            .catch((error) => {
+                console.log(response.data); // Optional: log the response data to console
+            } catch (error) {
                 console.log(error);
-            });
-    }, []);
-
+            }
+        };
+        fetchData(); // Call fetchData function
+    }, []); // Add id to dependencies array to fetch data when id changes
     return (
         <section className="book" id="book">
             <div className="row">
                 <table>
+                    <tbody>
                     <tr>
                         <td><h4>Name:</h4></td>
                         <td>{Complaint.Name}</td>
@@ -37,10 +39,24 @@ const ViewComplaint = (id) => {
                         <td><h4>Email:</h4></td>
                         <td>{Complaint.Email}</td>
                     </tr>
-                    <tr>
-                        <td><h4>Address:</h4></td>
-                        <td>{Complaint.Address}</td>
-                    </tr>
+                    <tr><td><h4>CIseries:</h4></td>
+                        <td>{Complaint.CIseries}</td></tr>
+                    <tr><td><h4>CInr:</h4></td>
+                        <td>{Complaint.CInr}</td></tr>
+                    <tr><td><h4>CNP:</h4></td>
+                        <td>{Complaint.CNP}</td></tr>
+                    <tr><td><h4>City:</h4></td>
+                        <td>{Complaint.City}</td></tr>
+                    <tr><td><h4>County:</h4></td>
+                        <td>{Complaint.County}</td></tr>
+                    <tr><td><h4>Street:</h4></td>
+                        <td>{Complaint.Street}</td></tr>
+                    <tr><td><h4>Bl:</h4></td>
+                        <td>{Complaint.Bl}</td></tr>
+                    <tr><td><h4>Sc:</h4></td>
+                        <td>{Complaint.Sc}</td></tr>
+                    <tr><td><h4>Ap:</h4></td>
+                        <td>{Complaint.Ap}</td></tr>
                     <tr>
                         <td><h4>PoliceName:</h4></td>
                         <td>{Complaint.PoliceName}</td>
@@ -141,11 +157,34 @@ const ViewComplaint = (id) => {
                         <td><h4>Lawyer:</h4></td>
                         <td>{Complaint.Lawyer}</td>
                     </tr>
+                    <tr>
+                        <td><WordDoc nume={Complaint.Name }
+                                     prenume={Complaint.Surname }
+                                     oras={Complaint.City }
+                                     strada={Complaint.Street }
+                                     bloc={Complaint.Bl }
+                                     scara={Complaint.Sc }
+                                     apartament={Complaint.Ap }
+                                     judet={Complaint.County }
+                                     seriaCI={Complaint.CIseries }
+                                     numarCI={Complaint.CInr }
+                                     cnp={Complaint.CNP }
+                                     serieProces={Complaint.SeriesVerbalProcess }
+                                     numarProces={Complaint.NumberVerbalProcess }
+                                     dataProces={Complaint.DateVerbalProcess }
+                                     dataProcesComunicat={Complaint.DateOfHandingOutVerbalProcess }
+                                     primit={Complaint.HandingOutVerbalProcess}
+                                     sumaAmenda={Complaint.PayTheFine}
+                                     amendaAchitata={Complaint.PayTheFine}
+                                     motivProces={Complaint.DescriptionOfTheEventInVerbalProcess }
+                                     articolAmenda={Complaint.LawParagraphEvent }
+                                     sanctiune={Complaint.LawParagraphEvent }
+                                     motivPetent={Complaint.LawParagraphEvent } /></td>
+                    </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
     );
 };
-
 export default ViewComplaint;

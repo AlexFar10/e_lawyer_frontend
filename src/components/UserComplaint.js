@@ -3,30 +3,16 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import ViewComplaint from "./ViewComplaint";
 import EditComplaint from "./EditComplaint";
+import {Link} from "react-router-dom";
 
 const UserData = (UserID) => {
     const [complaint, setComplaint] = useState([]);
-    const [isOpenEdit, setIsOpenEdit] = useState(false);
-    const [isOpenView, setIsOpenView] = useState(false);
 
-    const handleOpenEdit = () => {
-        setIsOpenEdit(true);
-    };
-
-    const handleCloseEdit = () => {
-        setIsOpenEdit(false);
-    };
-    const handleOpenView = () => {
-        setIsOpenView(true);
-    };
-
-    const handleCloseView = () => {
-        setIsOpenView(false);
-    };
     useEffect(() => {
         axios.get(`http://localhost:3000/complaint/userid/${UserID.userid}`)
             .then((response) => {
                 setComplaint(response.data);
+
             })
             .catch((error) => {
                 console.log(error);
@@ -61,24 +47,8 @@ const UserData = (UserID) => {
                             <td className="content"><label>{complaint.Observations}</label></td>
                             <td className="content"><label>{complaint.Status}</label></td>
                             <td className="content">
-                                <button className="btn" onClick={handleOpenEdit}>Editare</button>
-                                {isOpenEdit && (
-                                    <div className="modal-overlay">
-                                        <div className="modal-content">
-                                            <EditComplaint Id={complaint._id}/>
-                                            <button onClick={handleCloseEdit}>Inchide</button>
-                                        </div>
-                                    </div>
-                                )}
-                                <button className="btn" onClick={handleOpenView}>Vizualizare</button>
-                                {isOpenView && (
-                                    <div className="modal-overlay">
-                                        <div className="modal-content">
-                                            <ViewComplaint id={complaint._id}/>
-                                            <button onClick={handleCloseView}>Inchide</button>
-                                        </div>
-                                    </div>
-                                )}
+                                <Link to={`/edit/${complaint._id}`} activeclassname="current"><button className="btn" >Editare</button></Link>
+                                <Link to={`/view/${complaint._id}`} activeclassname="current"><button className="btn" >Vizualizare</button></Link>
                                 <button className="btn" onClick={() => deleteComplaint(complaint._id)}>Delete</button>
                             </td>
                         </tr>

@@ -1,18 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from '../api/axios';
 import '../css/style.css';
-
-const FORM_URL = 'http://localhost:3000/complaint';
-
-const EditComplaint = (user, Id) => {
-    const [Complaint, setComplaint] = useState([]);
-    console.log(Id)
+import { useParams} from 'react-router-dom';
+const EditComplaint = () => {
+    const [complaint, setComplaint] = useState({});
+    const { complaintId } = useParams();
+console.log(complaintId)
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/complaint/id/${Id}`)
+            .get(`http://localhost:3000/complaint/id/${complaintId}`)
             .then((response) => {
                 setComplaint(response.data);
-
+                console.log(response)
             })
             .catch((error) => {
                 console.log(error);
@@ -20,18 +19,14 @@ const EditComplaint = (user, Id) => {
     }, []);
 
     const errRef = useRef();
-
     const [errMsg, setErrMsg] = useState('');
-
 
     const [Name, setName] = useState('');
     const [Surname, setSurname] = useState('');
     const [Phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
-    const [Address, setAddress] = useState('');
     const [PoliceName, setPoliceName] = useState('');
     const [PoliceSurname, setPoliceSurname] = useState('');
-    const [PoliceRole, setPoliceRole] = useState('');
     const [PoliceInstitution, setPoliceInstitution] = useState('');
     const [EventPlace, setEventPlace] = useState('');
     const [VerbalProcess, setVerbalProcess] = useState('');
@@ -55,59 +50,77 @@ const EditComplaint = (user, Id) => {
     const [Judge, setJudge] = useState('');
     const [Lawyer, setLawyer] = useState('');
     const [Title, setTitle] = useState('');
+    const [Observations, setObservations] = useState('');
 
+    const [CIseries, setCIseries] = useState('');
+    const [CInr, setCInr] = useState('');
+    const [CNP, setCNP] = useState('');
+    const [City, setCity] = useState('');
+    const [County, setCounty] = useState('');
+    const [Street, setStreet] = useState('');
+    const [Bl, setBl] = useState('');
+    const [Sc, setSc] = useState('');
+    const [Ap, setAp] = useState('');
+    const [Accept, setAccept] = useState('');
+    const [WitnessesData, setWitnessesData] = useState('');
+    const [PoliceAdr, setPoliceAdr] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(FORM_URL,
-                {
-                    Name: Name,
-                    Surname: Surname,
-                    Phone: Phone,
-                    Email: Email,
-                    Address: Address,
-                    PoliceName: PoliceName,
-                    PoliceSurname: PoliceSurname,
-                    PoliceRole: PoliceRole,
-                    PoliceInstitution: PoliceInstitution,
-                    EventPlace: EventPlace,
-                    VerbalProcess: VerbalProcess,
-                    SeriesVerbalProcess: SeriesVerbalProcess,
-                    NumberVerbalProcess: NumberVerbalProcess,
-                    DateVerbalProcess: DateVerbalProcess,
-                    HandingOutVerbalProcess: HandingOutVerbalProcess,
-                    DateOfHandingOutVerbalProcess: DateOfHandingOutVerbalProcess,
-                    DateOfEvent: DateOfEvent,
-                    PayTheFine: PayTheFine,
-                    Options: Options,
-                    DescriptionOfTheEventInVerbalProcess: DescriptionOfTheEventInVerbalProcess,
-                    DescriptionOfTheEventInPersonalOpinion: DescriptionOfTheEventInPersonalOpinion,
-                    LawNumberEvent: LawNumberEvent,
-                    LawParagraphEvent: LawParagraphEvent,
-                    LawRuleEvent: LawRuleEvent,
-                    LawNumberPay: LawNumberPay,
-                    LawParagraphPay: LawParagraphPay,
-                    LawRulePay: LawRulePay,
-                    Witnesses: Witnesses,
-                    Judge: Judge,
-                    Lawyer: Lawyer,
-                    UserID: user.user,
-                    Title: Title,
+            await axios.put(`http://localhost:3000/complaint/${complaintId}`, {
+                Name: Name,
+                Surname: Surname,
+                Phone: Phone,
+                Email: Email,
+                PoliceName: PoliceName,
+                PoliceSurname: PoliceSurname,
+                PoliceInstitution: PoliceInstitution,
+                EventPlace: EventPlace,
+                VerbalProcess: VerbalProcess,
+                SeriesVerbalProcess: SeriesVerbalProcess,
+                NumberVerbalProcess: NumberVerbalProcess,
+                DateVerbalProcess: DateVerbalProcess,
+                HandingOutVerbalProcess: HandingOutVerbalProcess,
+                DateOfHandingOutVerbalProcess: DateOfHandingOutVerbalProcess,
+                DateOfEvent: DateOfEvent,
+                PayTheFine: PayTheFine,
+                Options: Options,
+                DescriptionOfTheEventInVerbalProcess: DescriptionOfTheEventInVerbalProcess,
+                DescriptionOfTheEventInPersonalOpinion: DescriptionOfTheEventInPersonalOpinion,
+                LawNumberEvent: LawNumberEvent,
+                LawParagraphEvent: LawParagraphEvent,
+                LawRuleEvent: LawRuleEvent,
+                LawNumberPay: LawNumberPay,
+                LawParagraphPay: LawParagraphPay,
+                LawRulePay: LawRulePay,
+                Witnesses: Witnesses,
+                Judge: Judge,
+                Lawyer: Lawyer,
+                UserID: complaint.UserID,
+                Title: Title,
+                Observations: Observations,
 
-                })
-            ;
-            console.log(response?.data);
-            console.log(JSON.stringify(response))
+                CIseries : CIseries,
+                CInr : CInr,
+                CNP : CNP,
+                City : City,
+                County : County,
+                Street : Street,
+                Bl : Bl,
+                Sc : Sc,
+                Ap : Ap,
+                Accept : Accept,
+                WitnessesData : WitnessesData,
+                PoliceAdr : PoliceAdr,
+            });
 
             setName('');
             setSurname('');
             setPhone('');
             setEmail('');
-            setAddress('');
             setPoliceName('');
             setPoliceSurname('');
-            setPoliceRole('');
             setPoliceInstitution('');
             setEventPlace('');
             setVerbalProcess('');
@@ -131,22 +144,36 @@ const EditComplaint = (user, Id) => {
             setJudge('');
             setLawyer('');
             setTitle('');
+            setObservations('');
+
+            setCIseries('');
+            setCInr('');
+            setCNP('');
+            setCity('');
+            setCounty('');
+            setStreet('');
+            setBl('');
+            setSc('');
+            setAp('');
+            setAccept('');
+            setWitnessesData('');
+            setPoliceAdr('');
 
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
-                console.log(err)
-
+                console.log(err);
             } else {
-                setErrMsg('Failed')
-                console.log(err)
+                setErrMsg('Failed');
+                console.log(err);
             }
-
         }
-    }
+    };
 
     return (
         <section>
+            <section className="book" id="book">
+                <div className="row">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="Name" className="content">Name:</label>
                 <input
@@ -156,7 +183,8 @@ const EditComplaint = (user, Id) => {
                     className="box"
                     autoComplete="off"
                     onChange={(e) => setName(e.target.value)}
-                    value={Complaint.Name}
+                    value={Name}
+                    placeholder={complaint.Name}
                     required
                 />
                 <label htmlFor="Surname" className="content">Surname:</label>
@@ -167,7 +195,8 @@ const EditComplaint = (user, Id) => {
                     className="box"
                     autoComplete="off"
                     onChange={(e) => setSurname(e.target.value)}
-                    value={Complaint.Surname}
+                    value={Surname}
+                    placeholder={complaint.Surname}
                     required
                 />
                 <label htmlFor="Phone" className="content">Phone:</label>
@@ -178,7 +207,8 @@ const EditComplaint = (user, Id) => {
                     className="box"
                     autoComplete="off"
                     onChange={(e) => setPhone(e.target.value)}
-                    value={Complaint.Phone}
+                    value={Phone}
+                    placeholder={complaint.Phone}
                     required
                 />
                 <label htmlFor="Email" className="content">Email:</label>
@@ -189,18 +219,113 @@ const EditComplaint = (user, Id) => {
                     className="box"
                     autoComplete="off"
                     onChange={(e) => setEmail(e.target.value)}
-                    value={Complaint.Email}
+                    value={Email}
+                    placeholder={complaint.Email}
                     required
                 />
-                <label htmlFor="Adress" className="content">Address:</label>
+                <label htmlFor="CIseries" className="content">CIseries:</label>
                 <input
                     type="text"
-                    id="Adress"
-                    name="Adress"
+                    id="CIseries"
+                    name="CIseries"
                     className="box"
                     autoComplete="off"
-                    onChange={(e) => setAddress(e.target.value)}
-                    value={Complaint.Address}
+                    onChange={(e) => setCIseries(e.target.value)}
+                    value={CIseries}
+                    placeholder={complaint.CIseries}
+                    required
+                />
+                <label htmlFor="CInr" className="content">CInr:</label>
+                <input
+                    type="text"
+                    id="CInr"
+                    name="CInr"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCInr(e.target.value)}
+                    value={CInr}
+                    placeholder={complaint.CInr}
+                    required
+                />
+                <label htmlFor="CNP" className="content">CNP:</label>
+                <input
+                    type="text"
+                    id="CNP"
+                    name="CNP"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCNP(e.target.value)}
+                    value={CNP}
+                    placeholder={complaint.CNP}
+                    required
+                />
+
+                <label htmlFor="City" className="content">City:</label>
+                <input
+                    type="text"
+                    id="City"
+                    name="City"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCity(e.target.value)}
+                    value={City}
+                    placeholder={complaint.City}
+                    required
+                />
+                <label htmlFor="County" className="content">County:</label>
+                <input
+                    type="text"
+                    id="County"
+                    name="County"
+                    className="box"
+                    onChange={(e) => setCounty(e.target.value)}
+                    value={County}
+                    placeholder={complaint.County}
+                    required
+                />
+
+                <label htmlFor="Street" className="content">Street:</label>
+                <input
+                    type="text"
+                    id="Street"
+                    name="Street"
+                    className="box"
+                    onChange={(e) => setStreet(e.target.value)}
+                    value={Street}
+                    placeholder={complaint.Street}
+                    required
+                />
+                <label htmlFor="Bl" className="content">Bl:</label>
+                <input
+                    type="text"
+                    id="Bl"
+                    name="Bl"
+                    className="box"
+                    onChange={(e) => setBl(e.target.value)}
+                    value={Bl}
+                    placeholder={complaint.Bl}
+                    required
+                />
+                <label htmlFor="Sc" className="content">Sc:</label>
+                <input
+                    type="text"
+                    id="Sc"
+                    name="Sc"
+                    className="box"
+                    onChange={(e) => setSc(e.target.value)}
+                    value={Sc}
+                    placeholder={complaint.Sc}
+                    required
+                />
+                <label htmlFor="Ap" className="content">Ap:</label>
+                <input
+                    type="text"
+                    id="Ap"
+                    name="Ap"
+                    className="box"
+                    onChange={(e) => setAp(e.target.value)}
+                    value={Ap}
+                    placeholder={complaint.Ap}
                     required
                 />
                 <label htmlFor="PoliceName" className="content">PoliceName:</label>
@@ -211,7 +336,8 @@ const EditComplaint = (user, Id) => {
                     className="box"
                     autoComplete="off"
                     onChange={(e) => setPoliceName(e.target.value)}
-                    value={Complaint.PoliceName}
+                    value={PoliceName}
+                    placeholder={complaint.PoliceName}
                     required
                 />
                 <label htmlFor="PoliceSurname" className="content">PoliceSurname:</label>
@@ -221,19 +347,11 @@ const EditComplaint = (user, Id) => {
                     name="PoliceSurname"
                     className="box"
                     onChange={(e) => setPoliceSurname(e.target.value)}
-                    value={Complaint.PoliceSurname}
+                    value={PoliceSurname}
+                    placeholder={complaint.PoliceSurname}
                     required
                 />
-                <label htmlFor="PoliceRole" className="content">PoliceRole:</label>
-                <input
-                    type="text"
-                    id="PoliceRople"
-                    name="PoliceRole"
-                    className="box"
-                    onChange={(e) => setPoliceRole(e.target.value)}
-                    value={Complaint.PoliceRole}
-                    required
-                />
+
                 <label htmlFor="PoliceInstitution" className="content">PoliceInstitution:</label>
                 <input
                     type="text"
@@ -241,7 +359,20 @@ const EditComplaint = (user, Id) => {
                     name="PoliceInstitution"
                     className="box"
                     onChange={(e) => setPoliceInstitution(e.target.value)}
-                    value={Complaint.PoliceInstitution}
+                    value={PoliceInstitution}
+                    placeholder={complaint.PoliceInstitution}
+                    required
+                />
+                <label htmlFor="PoliceAdr" className="content">PoliceAdr:</label>
+                <input
+                    type="text"
+                    id="PoliceAdr"
+                    name="PoliceAdr"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setPoliceAdr(e.target.value)}
+                    value={PoliceAdr}
+                    placeholder={complaint.PoliceAdr}
                     required
                 />
                 <label htmlFor="EventPlace" className="content">EventPlace:</label>
@@ -251,7 +382,8 @@ const EditComplaint = (user, Id) => {
                     name="EventPlace"
                     className="box"
                     onChange={(e) => setEventPlace(e.target.value)}
-                    value={Complaint.EventPlace}
+                    value={EventPlace}
+                    placeholder={complaint.EventPlace}
                     required
                 />
                 <label htmlFor="VerbalProcess" className="content">VerbalProcess:</label>
@@ -260,7 +392,8 @@ const EditComplaint = (user, Id) => {
                     name="VerbalProcess"
                     className="box"
                     onChange={(e) => setVerbalProcess(e.target.value)}
-                    value={Complaint.VerbalProcess}
+                    value={VerbalProcess}
+                    placeholder={complaint.VerbalProcess}
                     required
                 >
                     <option value="">Select an option</option>
@@ -274,7 +407,8 @@ const EditComplaint = (user, Id) => {
                     name="SeriesVerbalProcess"
                     className="box"
                     onChange={(e) => setSeriesVerbalProcess(e.target.value)}
-                    value={Complaint.SeriesVerbalProcess}
+                    value={SeriesVerbalProcess}
+                    placeholder={complaint.SeriesVerbalProcess}
                     required
                 />
                 <label htmlFor="NumberVerbalProcess" className="content">NumberVerbalProcess:</label>
@@ -284,7 +418,8 @@ const EditComplaint = (user, Id) => {
                     name="NumberVerbalProcess"
                     className="box"
                     onChange={(e) => setNumberVerbalProcess(e.target.value)}
-                    value={Complaint.NumberVerbalProcess}
+                    value={NumberVerbalProcess}
+                    placeholder={complaint.NumberVerbalProcess}
                     required
                 />
                 <label htmlFor="DateVerbalProcess" className="content">DateVerbalProcess:</label>
@@ -294,7 +429,8 @@ const EditComplaint = (user, Id) => {
                     name="DateVerbalProcess"
                     className="box"
                     onChange={(e) => setDateVerbalProcess(e.target.value)}
-                    value={Complaint.DateVerbalProcess}
+                    value={DateVerbalProcess}
+                    placeholder={complaint.DateVerbalProcess}
                     required
                 />
                 <label htmlFor="HandingOutVerbalProcess" className="content">HandingOutVerbalProcess:</label>
@@ -303,7 +439,8 @@ const EditComplaint = (user, Id) => {
                     name="HandingOutVerbalProcess"
                     className="box"
                     onChange={(e) => setHandingOutVerbalProcess(e.target.value)}
-                    value={Complaint.HandingOutVerbalProcess}
+                    value={HandingOutVerbalProcess}
+                    placeholder={complaint.HandingOutVerbalProcess}
                     required
                 >
                     <option value="">Select an option</option>
@@ -318,7 +455,8 @@ const EditComplaint = (user, Id) => {
                     name="DateOfHandingOutVerbalProcess"
                     className="box"
                     onChange={(e) => setDateOfHandingOutVerbalProcess(e.target.value)}
-                    value={Complaint.DateOfHandingOutVerbalProcess}
+                    value={DateOfHandingOutVerbalProcess}
+                    placeholder={complaint.DateOfHandingOutVerbalProcess}
                     required
                 />
                 <label htmlFor="DateOfEvent" className="content">DateOfEvent:</label>
@@ -328,7 +466,8 @@ const EditComplaint = (user, Id) => {
                     name="DateOfEvent"
                     className="box"
                     onChange={(e) => setDateOfEvent(e.target.value)}
-                    value={Complaint.DateOfEvent}
+                    value={DateOfEvent}
+                    placeholder={complaint.DateOfEvent}
                     required
                 />
                 <label htmlFor="PayTheFine" className="content">PayTheFine:</label>
@@ -337,7 +476,8 @@ const EditComplaint = (user, Id) => {
                     name="PayTheFine"
                     className="box"
                     onChange={(e) => setPayTheFine(e.target.value)}
-                    value={Complaint.PayTheFine}
+                    value={PayTheFine}
+                    placeholder={complaint.PayTheFine}
                     required
                 >
                     <option value="">Select an option</option>
@@ -351,7 +491,8 @@ const EditComplaint = (user, Id) => {
                     name="Options"
                     className="box"
                     onChange={(e) => setOptions(e.target.value)}
-                    value={Complaint.Options}
+                    value={Options}
+                    placeholder={complaint.Options}
                     required
                 >
                     <option value="">Select an option</option>
@@ -379,7 +520,8 @@ const EditComplaint = (user, Id) => {
                     name="DescriptionOfTheEventInVerbalProcess"
                     className="box"
                     onChange={(e) => setDescriptionOfTheEventInVerbalProcess(e.target.value)}
-                    value={Complaint.DescriptionOfTheEventInVerbalProcess}
+                    value={DescriptionOfTheEventInVerbalProcess}
+                    placeholder={complaint.DescriptionOfTheEventInVerbalProcess}
                     required
                 />
                 <label htmlFor="DescriptionOfTheEventInPersonalOpinion"
@@ -390,7 +532,8 @@ const EditComplaint = (user, Id) => {
                     name="DescriptionOfTheEventInPersonalOpinion"
                     className="box"
                     onChange={(e) => setDescriptionOfTheEventInPersonalOpinion(e.target.value)}
-                    value={Complaint.DescriptionOfTheEventInPersonalOpinion}
+                    value={DescriptionOfTheEventInPersonalOpinion}
+                    placeholder={complaint.DescriptionOfTheEventInPersonalOpinion}
                     required
                 />
                 <label htmlFor="LawNumberEvent" className="content">LawNumberEvent:</label>
@@ -400,7 +543,8 @@ const EditComplaint = (user, Id) => {
                     name="LawNumberEvent"
                     className="box"
                     onChange={(e) => setLawNumberEvent(e.target.value)}
-                    value={Complaint.LawNumberEvent}
+                    value={LawNumberEvent}
+                    placeholder={complaint.LawNumberPay}
                     required
                 />
                 <label htmlFor="LawParagraphEvent" className="content">LawParagraphEvent:</label>
@@ -410,7 +554,8 @@ const EditComplaint = (user, Id) => {
                     name="LawParagraphEvent"
                     className="box"
                     onChange={(e) => setLawParagraphEvent(e.target.value)}
-                    value={Complaint.LawParagraphEvent}
+                    value={LawParagraphEvent}
+                    placeholder={complaint.LawParagraphEvent}
                     required
                 />
                 <label htmlFor="LawRuleEvent" className="content">LawRuleEvent:</label>
@@ -420,7 +565,8 @@ const EditComplaint = (user, Id) => {
                     name="LawRuleEvent"
                     className="box"
                     onChange={(e) => setLawRuleEvent(e.target.value)}
-                    value={Complaint.LawRuleEvent}
+                    value={LawRuleEvent}
+                    placeholder={complaint.LawRuleEvent}
                     required
                 />
                 <label htmlFor="LawNumberPay" className="content">LawNumberPay:</label>
@@ -430,7 +576,8 @@ const EditComplaint = (user, Id) => {
                     name="LawNumberPay"
                     className="box"
                     onChange={(e) => setLawNumberPay(e.target.value)}
-                    value={Complaint.LawNumberPay}
+                    value={LawNumberPay}
+                    placeholder={complaint.LawNumberPay}
                     required
                 />
                 <label htmlFor="LawParagraphPay" className="content">LawParagraphPay:</label>
@@ -440,7 +587,8 @@ const EditComplaint = (user, Id) => {
                     name="LawParagraphPay"
                     className="box"
                     onChange={(e) => setLawParagraphPay(e.target.value)}
-                    value={Complaint.LawParagraphPay}
+                    value={LawParagraphPay}
+                    placeholder={complaint.LawParagraphPay}
                     required
                 />
                 <label htmlFor="LawRulePay" className="content">LawRulePay:</label>
@@ -450,7 +598,8 @@ const EditComplaint = (user, Id) => {
                     name="LawRulePay"
                     className="box"
                     onChange={(e) => setLawRulePay(e.target.value)}
-                    value={Complaint.LawRulePay}
+                    value={LawRulePay}
+                    placeholder={complaint.LawRulePay}
                     required
                 />
                 <label htmlFor="Witnesses" className="content">Witnesses:</label>
@@ -459,7 +608,8 @@ const EditComplaint = (user, Id) => {
                     name="Witnesses"
                     className="box"
                     onChange={(e) => setWitnesses(e.target.value)}
-                    value={Complaint.Witnesses}
+                    value={Witnesses}
+                    placeholder={complaint.Witnesses}
                     required
                 >
                     <option value="">Select an option</option>
@@ -467,14 +617,26 @@ const EditComplaint = (user, Id) => {
                     <option value="NU">NU</option>
                 </select>
 
-
+                <label htmlFor="WitnessesData" className="content">WitnessesData:</label>
+                <input
+                    type="text"
+                    id="WitnessesData"
+                    name="WitnessesData"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setWitnessesData(e.target.value)}
+                    value={WitnessesData}
+                    placeholder={complaint.WitnessesData}
+                    required
+                />
                 <label htmlFor="Judge" className="content">Judge:</label>
                 <select
                     id="Judge"
                     name="Judge"
                     className="box"
                     onChange={(e) => setJudge(e.target.value)}
-                    value={Complaint.Judge}
+                    value={Judge}
+                    placeholder={complaint.Judge}
                     required
                 >
                     <option value="">Select an option</option>
@@ -492,7 +654,8 @@ const EditComplaint = (user, Id) => {
                     name="Lawyer"
                     className="box"
                     onChange={(e) => setLawyer(e.target.value)}
-                    value={Complaint.Lawyer}
+                    value={Lawyer}
+                    placeholder={complaint.Lawyer}
                     required
                 >
                     <option value="">Select an option</option>
@@ -506,19 +669,42 @@ const EditComplaint = (user, Id) => {
                     name="LawRulePay"
                     className="box"
                     onChange={(e) => setTitle(e.target.value)}
-                    value={Complaint.Title}
+                    value={Title}
+                    placeholder={complaint.Title}
                     required
                 />
-
+                <label htmlFor="LawRulePay" className="content">Observations:</label>
+                <input
+                    type="text"
+                    id="LawRulePay"
+                    name="LawRulePay"
+                    className="box"
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={Observations}
+                    placeholder={complaint.Observations}
+                    required
+                />
+                <label htmlFor="Accept" className="content">Accept:</label>
+                <input
+                    type="text"
+                    id="Accept"
+                    name="Accept"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setAccept(e.target.value)}
+                    value={Accept}
+                    placeholder={complaint.Accept}
+                    required
+                />
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                     {errMsg}
                 </p>
                 <button className="btn">Submit</button>
-
             </form>
-
-
+                </div>
+            </section>
         </section>
     );
 };
+
 export default EditComplaint;

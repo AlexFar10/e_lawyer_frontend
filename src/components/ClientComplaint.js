@@ -1,43 +1,27 @@
 import "../css/style.css"
 import axios from "axios";
 import {useEffect, useState} from "react";
-import ViewComplaint from "./ViewComplaint";
-import EditComplaint from "./EditComplaint";
+import {Link, useParams} from 'react-router-dom';
+const UserData = () => {
+    const { userId } = useParams();
+    const [complaint, setComplaint] = useState([]);
 
-const UserData = (UserID) => {
-    const [users, setUsers] = useState([]);
-    const [isOpenEdit, setIsOpenEdit] = useState(false);
-    const [isOpenView, setIsOpenView] = useState(false);
 
-    const handleOpenEdit = () => {
-        setIsOpenEdit(true);
-    };
-
-    const handleCloseEdit = () => {
-        setIsOpenEdit(false);
-    };
-    const handleOpenView = () => {
-        setIsOpenView(true);
-    };
-
-    const handleCloseView = () => {
-        setIsOpenView(false);
-    };
-    console.log(UserID.userid)
     useEffect(() => {
-        axios.get(`http://localhost:3000/complaint/userid/${UserID.userid}`)
+        axios.get(`http://localhost:3000/complaint/userid/${userId}`)
             .then((response) => {
-                setUsers(response.data);
+                setComplaint(response.data);
+
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
 
-    async function deleteUser(id) {
+    async function deleteComplaint(id) {
         try {
             await axios.delete(`http://localhost:3000/complaint/${id}`);
-            setUsers(users.filter((user) => user._id !== id));
+            setComplaint(complaint.filter((complaint) => complaint._id !== id));
         } catch (error) {
             console.log(error);
         }
@@ -56,31 +40,17 @@ const UserData = (UserID) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {users.map((user) => (
-                        <tr key={user._id}>
-                            <td className="content"><label>{user.Title}</label></td>
-                            <td className="content"><label>{user.Observations}</label></td>
-                            <td className="content"><label>{user.Status}</label></td>
+                    {complaint.map((complaint) => (
+                        <tr key={complaint._id}>
+                            <td className="content"><label>{complaint.Title}</label></td>
+                            <td className="content"><label>{complaint.Observations}</label></td>
+                            <td className="content"><label>{complaint.Status}</label></td>
                             <td className="content">
-                                <button className="btn" onClick={handleOpenEdit}>Editare</button>
-                                {isOpenEdit && (
-                                    <div className="modal-overlay">
-                                        <div className="modal-content">
-                                            <EditComplaint Id={user._id}/>
-                                            <button onClick={handleCloseEdit}>Inchide</button>
-                                        </div>
-                                    </div>
-                                )}
-                                <button className="btn" onClick={handleOpenView}>Cizualizare</button>
-                                {isOpenView && (
-                                    <div className="modal-overlay">
-                                        <div className="modal-content">
-                                            <ViewComplaint id={user._id}/>
-                                            <button onClick={handleCloseView}>Inchide</button>
-                                        </div>
-                                    </div>
-                                )}
-                                <button className="btn" onClick={() => deleteUser(user._id)}>Delete</button>
+                                <Link to={`/edit/${complaint._id}`} activeclassname="current"><button className="btn" >Editare</button></Link>
+                                <Link to={`/view/${complaint._id}`} activeclassname="current"><button className="btn" >Vizualizare</button></Link>
+                                <button className="btn" onClick={() => deleteComplaint(complaint._id)}>Delete</button>
+
+
                             </td>
                         </tr>
                     ))}

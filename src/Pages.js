@@ -4,17 +4,16 @@ import FormComplaint from "./components/FormComplaint";
 import UserData from "./components/UserData";
 import FormFile from "./components/FormFile";
 import UserFile from "./components/UserFile";
-import ClientFile from "./components/ClientFile";
+import Client from "./components/Client";
 import UserComplaint from "./components/UserComplaint";
-import ClientComplaint from "./components/ClientComplaint";
+import {Link} from "react-router-dom";
 
 const Pages = ({Role, UserId}) => {
     const [showComplaintForm, setShowComplaintForm] = useState(false);
     const [showFileForm, setShowFileForm] = useState(false);
     const [showUserFile, setShowUserFile] = useState(false);
     const [showUserComplaint, setShowUserComplaint] = useState(false);
-    const [showClientFile, setShowClientFile] = useState(false);
-    const [showClientComplaint, setShowClientComplaint] = useState(false);
+    const [showClient, setShowClient] = useState(false);
     const [showUserData, setShowUserData] = useState(false);
 
     const handleComplainClick = () => {
@@ -30,12 +29,10 @@ const Pages = ({Role, UserId}) => {
     const handleUserComplaintClick = () => {
         setShowUserComplaint(prevState => !prevState);
     };
-    const handleClientFileClick = () => {
-        setShowClientFile(prevState => !prevState);
+    const handleClientClick = () => {
+        setShowClient(prevState => !prevState);
     };
-    const handleClientComplaintClick = () => {
-        setShowClientComplaint(prevState => !prevState);
-    };
+
     const handleUserData = () => {
         setShowUserData(prevState => !prevState);
     };
@@ -64,34 +61,24 @@ const Pages = ({Role, UserId}) => {
                         {showUserFile && <UserFile User_Id={UserId}/>}
                     </div>
                     <div className="row">
-                        <button className="btn" onClick={handleUserComplaintClick}>
-                            {showUserComplaint ? "Inchide contestatie" : "Deschide contestatie"}
-                        </button>
-                        {showUserComplaint && <UserComplaint userid={UserId}/>}
+                        <Link to={`/usercomplaint/${UserId}`} activeclassname="current">  <button className="btn">
+                          Lista contestatii
+                        </button></Link>
                     </div>
                 </section>
             </>
         )
 
-    if (Role === 'lawyer')
+    if (Role === 'avocat')
         return (
             <>
                 <section className="book" id="book">
                     <div className="row">
-                        <button className="btn" onClick={handleClientFileClick}>
-                            {showClientFile ? "Inchide fisiere" : "Deschide fisiere"}
+                        <button className="btn" onClick={handleClientClick}>
+                            {showClient ? "Inchide lista clienti" : "Deschide lista clienti"}
                         </button>
-                        {showClientFile && <ClientFile User_Id={UserId}/>}
+                        {showClient && <Client User_Id={UserId}/>}
                     </div>
-                </section>
-                <section className="book" id="book">
-                    <div className="row">
-                        <button className="btn" onClick={handleClientComplaintClick}>
-                            {showClientComplaint ? "Inchide fisiere" : "Deschide fisiere"}
-                        </button>
-                        {showClientComplaint && <ClientComplaint UserId={UserId}/>}
-                    </div>
-
                 </section>
             </>
         )

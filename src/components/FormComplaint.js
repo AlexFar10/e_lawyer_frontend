@@ -17,10 +17,8 @@ const FormComplaint = (user) => {
     const [Surname, setSurname] = useState('');
     const [Phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
-    const [Address, setAddress] = useState('');
     const [PoliceName, setPoliceName] = useState('');
     const [PoliceSurname, setPoliceSurname] = useState('');
-    const [PoliceRole, setPoliceRole] = useState('');
     const [PoliceInstitution, setPoliceInstitution] = useState('');
     const [EventPlace, setEventPlace] = useState('');
     const [VerbalProcess, setVerbalProcess] = useState('');
@@ -45,6 +43,20 @@ const FormComplaint = (user) => {
     const [Lawyer, setLawyer] = useState('');
     const [Title, setTitle] = useState('');
 
+    const [CIseries, setCIseries] = useState('');
+    const [CInr, setCInr] = useState('');
+    const [CNP, setCNP] = useState('');
+    const [City, setCity] = useState('');
+    const [County, setCounty] = useState('');
+    const [Street, setStreet] = useState('');
+    const [Bl, setBl] = useState('');
+    const [Sc, setSc] = useState('');
+    const [Ap, setAp] = useState('');
+    const [Accept, setAccept] = useState('');
+    const [WitnessesData, setWitnessesData] = useState('');
+    const [PoliceAdr, setPoliceAdr] = useState('');
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,10 +67,8 @@ const FormComplaint = (user) => {
                     Surname: Surname,
                     Phone: Phone,
                     Email: Email,
-                    Address: Address,
                     PoliceName: PoliceName,
                     PoliceSurname: PoliceSurname,
-                    PoliceRole: PoliceRole,
                     PoliceInstitution: PoliceInstitution,
                     EventPlace: EventPlace,
                     VerbalProcess: VerbalProcess,
@@ -84,6 +94,19 @@ const FormComplaint = (user) => {
                     UserID: user.user,
                     Title: Title,
 
+                    CIseries : CIseries,
+                    CInr : CInr,
+                    CNP : CNP,
+                    City : City,
+                    County : County,
+                    Street : Street,
+                    Bl : Bl,
+                    Sc : Sc,
+                    Ap : Ap,
+                    Accept : Accept,
+                    WitnessesData : WitnessesData,
+                    PoliceAdr : PoliceAdr,
+
                 })
             ;
             console.log(response?.data);
@@ -93,10 +116,8 @@ const FormComplaint = (user) => {
             setSurname('');
             setPhone('');
             setEmail('');
-            setAddress('');
             setPoliceName('');
             setPoliceSurname('');
-            setPoliceRole('');
             setPoliceInstitution('');
             setEventPlace('');
             setVerbalProcess('');
@@ -120,6 +141,22 @@ const FormComplaint = (user) => {
             setJudge('');
             setLawyer('');
             setTitle('');
+
+            setCIseries('');
+            setCInr('');
+            setCNP('');
+            setCity('');
+            setCounty('');
+            setStreet('');
+            setBl('');
+            setSc('');
+            setAp('');
+            setAccept('');
+            setWitnessesData('');
+            setPoliceAdr('');
+
+
+
 
         } catch (err) {
             if (!err?.response) {
@@ -198,15 +235,100 @@ const FormComplaint = (user) => {
                     value={Email}
                     required
                 />
-                <label htmlFor="Adress" className="content">Address:</label>
+                <label htmlFor="CIseries" className="content">CIseries:</label>
                 <input
                     type="text"
-                    id="Adress"
-                    name="Adress"
+                    id="CIseries"
+                    name="CIseries"
                     className="box"
                     autoComplete="off"
-                    onChange={(e) => setAddress(e.target.value)}
-                    value={Address}
+                    onChange={(e) => setCIseries(e.target.value)}
+                    value={CIseries}
+                    required
+                />
+                <label htmlFor="CInr" className="content">CInr:</label>
+                <input
+                    type="text"
+                    id="CInr"
+                    name="CInr"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCInr(e.target.value)}
+                    value={CInr}
+                    required
+                />
+                <label htmlFor="CNP" className="content">CNP:</label>
+                <input
+                    type="text"
+                    id="CNP"
+                    name="CNP"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCNP(e.target.value)}
+                    value={CNP}
+                    required
+                />
+
+                <label htmlFor="City" className="content">City:</label>
+                <input
+                    type="text"
+                    id="City"
+                    name="City"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setCity(e.target.value)}
+                    value={City}
+                    required
+                />
+                <label htmlFor="County" className="content">County:</label>
+                <input
+                    type="text"
+                    id="County"
+                    name="County"
+                    className="box"
+                    onChange={(e) => setCounty(e.target.value)}
+                    value={County}
+                    required
+                />
+
+                <label htmlFor="Street" className="content">Street:</label>
+                <input
+                    type="text"
+                    id="Street"
+                    name="Street"
+                    className="box"
+                    onChange={(e) => setStreet(e.target.value)}
+                    value={Street}
+                    required
+                />
+                <label htmlFor="Bl" className="content">Bl:</label>
+                <input
+                    type="text"
+                    id="Bl"
+                    name="Bl"
+                    className="box"
+                    onChange={(e) => setBl(e.target.value)}
+                    value={Bl}
+                    required
+                />
+                <label htmlFor="Sc" className="content">Sc:</label>
+                <input
+                    type="text"
+                    id="Sc"
+                    name="Sc"
+                    className="box"
+                    onChange={(e) => setSc(e.target.value)}
+                    value={Sc}
+                    required
+                />
+                <label htmlFor="Ap" className="content">Ap:</label>
+                <input
+                    type="text"
+                    id="Ap"
+                    name="Ap"
+                    className="box"
+                    onChange={(e) => setAp(e.target.value)}
+                    value={Ap}
                     required
                 />
                 <label htmlFor="PoliceName" className="content">PoliceName:</label>
@@ -230,16 +352,7 @@ const FormComplaint = (user) => {
                     value={PoliceSurname}
                     required
                 />
-                <label htmlFor="PoliceRole" className="content">PoliceRole:</label>
-                <input
-                    type="text"
-                    id="PoliceRople"
-                    name="PoliceRole"
-                    className="box"
-                    onChange={(e) => setPoliceRole(e.target.value)}
-                    value={PoliceRole}
-                    required
-                />
+
                 <label htmlFor="PoliceInstitution" className="content">PoliceInstitution:</label>
                 <input
                     type="text"
@@ -248,6 +361,17 @@ const FormComplaint = (user) => {
                     className="box"
                     onChange={(e) => setPoliceInstitution(e.target.value)}
                     value={PoliceInstitution}
+                    required
+                />
+                <label htmlFor="PoliceAdr" className="content">PoliceAdr:</label>
+                <input
+                    type="text"
+                    id="PoliceAdr"
+                    name="PoliceAdr"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setPoliceAdr(e.target.value)}
+                    value={PoliceAdr}
                     required
                 />
                 <label htmlFor="EventPlace" className="content">EventPlace:</label>
@@ -313,7 +437,7 @@ const FormComplaint = (user) => {
                     required
                 >
                     <option value="">Select an option</option>
-                    <option value="PRIN INMABARE LA FATA LOCULUI">PRIN INMABARE LA FATA LOCULUI</option>
+                    <option value="PRIN INMANARE LA FATA LOCULUI">PRIN INMABARE LA FATA LOCULUI</option>
                     <option value="PRIN POSTA">PRIN POSTA</option>
                 </select>
                 <label htmlFor="DateOfHandingOutVerbalProcess"
@@ -473,7 +597,17 @@ const FormComplaint = (user) => {
                     <option value="NU">NU</option>
                 </select>
 
-
+                <label htmlFor="WitnessesData" className="content">WitnessesData:</label>
+                <input
+                    type="text"
+                    id="WitnessesData"
+                    name="WitnessesData"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setWitnessesData(e.target.value)}
+                    value={WitnessesData}
+                    required
+                />
                 <label htmlFor="Judge" className="content">Judge:</label>
                 <select
                     id="Judge"
@@ -515,7 +649,17 @@ const FormComplaint = (user) => {
                     value={Title}
                     required
                 />
-
+                <label htmlFor="Accept" className="content">Accept:</label>
+                <input
+                    type="text"
+                    id="Accept"
+                    name="Accept"
+                    className="box"
+                    autoComplete="off"
+                    onChange={(e) => setAccept(e.target.value)}
+                    value={Accept}
+                    required
+                />
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                     {errMsg}
                 </p>

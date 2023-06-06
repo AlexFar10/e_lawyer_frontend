@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../css/style.css';
+import axios from "axios";
 
 const FileList = ({User_Id}) => {
     const [files, setFiles] = useState([]);
@@ -18,7 +19,14 @@ const FileList = ({User_Id}) => {
             console.error('Failed to fetch files:', error);
         }
     };
-
+    async function handleFileDelete(id) {
+        try {
+            await axios.delete(`http://localhost:3000/file/${id}`);
+            setFiles(files.filter((files) => files._id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const handleFileDownload = (filename) => {
         const saveAs = (uri, filename) => {
             const link = document.createElement('a');
@@ -72,6 +80,12 @@ const FileList = ({User_Id}) => {
                                     onClick={() => handleFileDownload(file.filename)}
                                 >
                                     Download
+                                </button>
+                                <button
+                                    className="btn"
+                                    onClick={() => handleFileDelete(file._id)}
+                                >
+                                    Stergere
                                 </button>
                             </td>
                         </tr>
