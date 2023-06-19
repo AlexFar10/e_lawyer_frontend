@@ -99,7 +99,7 @@ const Pages = () => {
 
                     <div className="row">
                         <button className="btn" onClick={handleUserData}>
-                            {showUserData ? "CloseUserData" : "UserData"}
+                            {showUserData ? "Închide UserData" : "Deschide UserData"}
                         </button>
                         {showUserData && <UserData/>}
                     </div>

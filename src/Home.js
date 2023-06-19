@@ -30,7 +30,7 @@ class Home extends Component {
                         <Route path="/reset" element={<ResetPwd/>}/>
                         <Route path="/usercomplaint/:email" element={<LawyerComplaint/>}/>
                         <Route path="/edit/:complaintId" element={<EditComplaint/>}/>
-                        <Route path="/view/:complaintId" element={<ViewComplaint/>}/>
+                        <Route path="/view/:complaintId/:complaintPoliceInstitution" element={<ViewComplaint/>}/>
                         <Route path="/reset-password/:email/:token" element={<NewPwd/>}/>
                     </Routes>
                 </BrowserRouter>

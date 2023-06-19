@@ -12,7 +12,7 @@ const ResetPwd = () => {
                 email: resetEmail,
             });
             if (response.data.success) {
-                alert("Please check your email for password reset link.");
+                alert("Verifică email-ul pentru resetarea parolei.");
             } else {
                 alert(response.data.message);
             }
@@ -26,8 +26,8 @@ const ResetPwd = () => {
         <section className="book" id="book">
             <div className="row">
                 <form onSubmit={handlePasswordReset}>
-                    <h3>Forgot Password</h3>
-                    <label className="content">Email address</label>
+                    <h3>Resetare parolă</h3>
+                    <label className="content">Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -37,7 +37,7 @@ const ResetPwd = () => {
                         className="box"
                     />
                     <button type="submit" className="btn">
-                        Submit
+                        Trimite
                     </button>
                 </form>
             </div>

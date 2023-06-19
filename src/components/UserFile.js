@@ -58,10 +58,10 @@ const FileList = ({User_Id}) => {
                             <h3>Nume</h3>
                         </th>
                         <th className="content">
-                            <h3>Observatii</h3>
+                            <h3>Observații</h3>
                         </th>
                         <th className="content">
-                            <h3>Descarcare</h3>
+                            <h3>Gestionare</h3>
                         </th>
                     </tr>
                     </thead>
@@ -79,7 +79,7 @@ const FileList = ({User_Id}) => {
                                     className="btn"
                                     onClick={() => handleFileDownload(file.filename)}
                                 >
-                                    Download
+                                    Descarcă
                                 </button>
                                 <button
                                     className="btn"

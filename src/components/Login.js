@@ -81,7 +81,7 @@ const Login = () => {
                     <div className="row">
                         <Pages Role={userRole} UserId={userId}/>
                         <button className="btn" onClick={handleLogout}>
-                            LogOut
+                            Deconectare
                         </button>
                     </div>
                 </section>
@@ -110,7 +110,7 @@ const Login = () => {
                                 required
                                 className="box"
                             />
-                            <label htmlFor="password">Password:</label>
+                            <label htmlFor="password">Parolă:</label>
                             <input
                                 type="password"
                                 id="password"
@@ -119,7 +119,7 @@ const Login = () => {
                                 required
                                 className="box"
                             />
-                            <button className="btn">Log In</button>
+                            <button className="btn">Conectare</button>
 
                         </form>
 

@@ -99,7 +99,7 @@ const Form = () => {
                         <h3>Creare cont</h3>
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <label htmlFor="name">
-                            Name:
+                            Nume:
                         </label>
                         <input
                             type="text"
@@ -111,7 +111,7 @@ const Form = () => {
                             aria-describedby="uidnote"
                             className="box"/>
                         <label htmlFor="surname">
-                            Surname:
+                            Prenume:
                         </label>
                         <input
                             type="text"
@@ -135,7 +135,7 @@ const Form = () => {
                             required
                             className="box"/>
                         <label htmlFor="password">
-                            Password:
+                            Parolă:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"}/>
                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"}/>
                         </label>
@@ -152,14 +152,14 @@ const Form = () => {
                             className="box"/>
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle}/>
-                            8 to 32 characters.<br/>
-                            Must include uppercase and lowercase letters, a number and a special character.<br/>
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span
+                            între 8 și 32 de caractere.<br/>
+                            Trebuie să includă litere mari, litere mici, un număr și un caracter special.<br/>
+                            Caractere speciale acceptate: <span aria-label="exclamation mark">!</span> <span
                             aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span
                             aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
                         <label htmlFor="confirm_pwd">
-                            Confirm Password:
+                            Confirmare parolă:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"}/>
                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"}/>
                         </label>
@@ -177,9 +177,9 @@ const Form = () => {
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle}/>
-                            Must match the first password input field.
+                            Parolele nu sunt la fel.
                         </p>
-                        <button className="btn">Sign Up</button>
+                        <button className="btn">Înregistrare</button>
 
                     </form>
 

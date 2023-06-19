@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from '../api/axios';
 import '../css/style.css';
 import {PayPalButtons, PayPalScriptProvider} from "@paypal/react-paypal-js";
@@ -55,8 +55,6 @@ const FormComplaint = (user) => {
     const [Accept, setAccept] = useState('');
     const [WitnessesData, setWitnessesData] = useState('');
     const [PoliceAdr, setPoliceAdr] = useState('');
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -176,6 +174,7 @@ const FormComplaint = (user) => {
             purchase_units: [
                 {
                     amount: {
+                        currency_code: "RON",
                         value: "13.99"
                     }
                 }
@@ -188,10 +187,11 @@ const FormComplaint = (user) => {
         alert(`Transaction completed by ${name}`);
     };
 
+
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="Name" className="content">Name:</label>
+                <label htmlFor="Name" className="content">Nume:</label>
                 <input
                     type="text"
                     id="Name"
@@ -202,7 +202,7 @@ const FormComplaint = (user) => {
                     value={Name}
                     required
                 />
-                <label htmlFor="Surname" className="content">Surname:</label>
+                <label htmlFor="Surname" className="content">Prenume:</label>
                 <input
                     type="text"
                     id="Surname"
@@ -213,7 +213,7 @@ const FormComplaint = (user) => {
                     value={Surname}
                     required
                 />
-                <label htmlFor="Phone" className="content">Phone:</label>
+                <label htmlFor="Phone" className="content">Telefon:</label>
                 <input
                     type="text"
                     id="Phone"
@@ -235,7 +235,7 @@ const FormComplaint = (user) => {
                     value={Email}
                     required
                 />
-                <label htmlFor="CIseries" className="content">CIseries:</label>
+                <label htmlFor="CIseries" className="content">Serie buletin:</label>
                 <input
                     type="text"
                     id="CIseries"
@@ -246,7 +246,7 @@ const FormComplaint = (user) => {
                     value={CIseries}
                     required
                 />
-                <label htmlFor="CInr" className="content">CInr:</label>
+                <label htmlFor="CInr" className="content">Număr buletin:</label>
                 <input
                     type="text"
                     id="CInr"
@@ -269,7 +269,7 @@ const FormComplaint = (user) => {
                     required
                 />
 
-                <label htmlFor="City" className="content">City:</label>
+                <label htmlFor="City" className="content">Oraș:</label>
                 <input
                     type="text"
                     id="City"
@@ -280,7 +280,7 @@ const FormComplaint = (user) => {
                     value={City}
                     required
                 />
-                <label htmlFor="County" className="content">County:</label>
+                <label htmlFor="County" className="content">Județ:</label>
                 <input
                     type="text"
                     id="County"
@@ -291,7 +291,7 @@ const FormComplaint = (user) => {
                     required
                 />
 
-                <label htmlFor="Street" className="content">Street:</label>
+                <label htmlFor="Street" className="content">Stradă:</label>
                 <input
                     type="text"
                     id="Street"
@@ -301,7 +301,7 @@ const FormComplaint = (user) => {
                     value={Street}
                     required
                 />
-                <label htmlFor="Bl" className="content">Bl:</label>
+                <label htmlFor="Bl" className="content">Bloc:</label>
                 <input
                     type="text"
                     id="Bl"
@@ -311,7 +311,7 @@ const FormComplaint = (user) => {
                     value={Bl}
                     required
                 />
-                <label htmlFor="Sc" className="content">Sc:</label>
+                <label htmlFor="Sc" className="content">Scară:</label>
                 <input
                     type="text"
                     id="Sc"
@@ -321,7 +321,7 @@ const FormComplaint = (user) => {
                     value={Sc}
                     required
                 />
-                <label htmlFor="Ap" className="content">Ap:</label>
+                <label htmlFor="Ap" className="content">Apartament:</label>
                 <input
                     type="text"
                     id="Ap"
@@ -331,7 +331,7 @@ const FormComplaint = (user) => {
                     value={Ap}
                     required
                 />
-                <label htmlFor="PoliceName" className="content">PoliceName:</label>
+                <label htmlFor="PoliceName" className="content">Numele agentului constatator:</label>
                 <input
                     type="text"
                     id="PoliceName"
@@ -342,7 +342,7 @@ const FormComplaint = (user) => {
                     value={PoliceName}
                     required
                 />
-                <label htmlFor="PoliceSurname" className="content">PoliceSurname:</label>
+                <label htmlFor="PoliceSurname" className="content">Prenumele agentului constatator:</label>
                 <input
                     type="text"
                     id="PoliceSurname"
@@ -353,7 +353,7 @@ const FormComplaint = (user) => {
                     required
                 />
 
-                <label htmlFor="PoliceInstitution" className="content">PoliceInstitution:</label>
+                <label htmlFor="PoliceInstitution" className="content">Instituția de poliție (orașul, comuna unde se află):</label>
                 <input
                     type="text"
                     id="PoliceInstitution"
@@ -363,18 +363,7 @@ const FormComplaint = (user) => {
                     value={PoliceInstitution}
                     required
                 />
-                <label htmlFor="PoliceAdr" className="content">PoliceAdr:</label>
-                <input
-                    type="text"
-                    id="PoliceAdr"
-                    name="PoliceAdr"
-                    className="box"
-                    autoComplete="off"
-                    onChange={(e) => setPoliceAdr(e.target.value)}
-                    value={PoliceAdr}
-                    required
-                />
-                <label htmlFor="EventPlace" className="content">EventPlace:</label>
+                <label htmlFor="EventPlace" className="content">Locul săvârșirii contravenției:</label>
                 <input
                     type="text"
                     id="EventPlace"
@@ -384,7 +373,7 @@ const FormComplaint = (user) => {
                     value={EventPlace}
                     required
                 />
-                <label htmlFor="VerbalProcess" className="content">VerbalProcess:</label>
+                <label htmlFor="VerbalProcess" className="content">Sunteți în posesia procesului verbal?:</label>
                 <select
                     id="VerbalProcess"
                     name="VerbalProcess"
@@ -393,11 +382,11 @@ const FormComplaint = (user) => {
                     value={VerbalProcess}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="DA">DA</option>
                     <option value="NU">NU</option>
                 </select>
-                <label htmlFor="SeriesVerbalProcess" className="content">SeriesVerbalProcess:</label>
+                <label htmlFor="SeriesVerbalProcess" className="content">Serie proces verbal:</label>
                 <input
                     type="text"
                     id="SeriesVerbalProcess"
@@ -407,7 +396,7 @@ const FormComplaint = (user) => {
                     value={SeriesVerbalProcess}
                     required
                 />
-                <label htmlFor="NumberVerbalProcess" className="content">NumberVerbalProcess:</label>
+                <label htmlFor="NumberVerbalProcess" className="content">Număr proces verbal:</label>
                 <input
                     type="text"
                     id="NumberVerbalProcess"
@@ -417,7 +406,7 @@ const FormComplaint = (user) => {
                     value={NumberVerbalProcess}
                     required
                 />
-                <label htmlFor="DateVerbalProcess" className="content">DateVerbalProcess:</label>
+                <label htmlFor="DateVerbalProcess" className="content">Data întocmirii procesului verbal:</label>
                 <input
                     type="text"
                     id="DateVerbalProcess"
@@ -427,7 +416,7 @@ const FormComplaint = (user) => {
                     value={DateVerbalProcess}
                     required
                 />
-                <label htmlFor="HandingOutVerbalProcess" className="content">HandingOutVerbalProcess:</label>
+                <label htmlFor="HandingOutVerbalProcess" className="content">Cum ați intrat în posesia procesului verbal?:</label>
                 <select
                     id="HandingOutVerbalProcess"
                     name="HandingOutVerbalProcess"
@@ -436,12 +425,12 @@ const FormComplaint = (user) => {
                     value={HandingOutVerbalProcess}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="PRIN INMANARE LA FATA LOCULUI">PRIN INMABARE LA FATA LOCULUI</option>
                     <option value="PRIN POSTA">PRIN POSTA</option>
                 </select>
                 <label htmlFor="DateOfHandingOutVerbalProcess"
-                       className="content">DateOfHandingOutVerbalProcess:</label>
+                       className="content">Data înmânării/comunicării procesului verbal:</label>
                 <input
                     type="text"
                     id="DateOfHandingOutVerbalProcess"
@@ -451,7 +440,7 @@ const FormComplaint = (user) => {
                     value={DateOfHandingOutVerbalProcess}
                     required
                 />
-                <label htmlFor="DateOfEvent" className="content">DateOfEvent:</label>
+                <label htmlFor="DateOfEvent" className="content">Data săvârșirii faptei:</label>
                 <input
                     type="text"
                     id="DateOfEvent"
@@ -461,7 +450,7 @@ const FormComplaint = (user) => {
                     value={DateOfEvent}
                     required
                 />
-                <label htmlFor="PayTheFine" className="content">PayTheFine:</label>
+                <label htmlFor="PayTheFine" className="content">Aţi plătit amenda instituită prin procesul verbal?:</label>
                 <select
                     id="PayTheFine"
                     name="PayTheFine"
@@ -470,12 +459,12 @@ const FormComplaint = (user) => {
                     value={PayTheFine}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="DA">DA</option>
                     <option value="NU">NU</option>
                 </select>
 
-                <label htmlFor="Options" className="content">Options:</label>
+                <label htmlFor="Options" className="content">Care dintre opţiunile de mai jos le solicitaţi instanţei de judecată?:</label>
                 <select
                     id="Options"
                     name="Options"
@@ -484,11 +473,9 @@ const FormComplaint = (user) => {
                     value={Options}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option
                         value="Doresc anularea amenzi pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea">Doresc
-                        anularea amenzi pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori
-                        care să ateste nevinovaţia mea
                     </option>
                     <option
                         value="Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.">Doresc
@@ -502,7 +489,7 @@ const FormComplaint = (user) => {
                     </option>
                 </select>
                 <label htmlFor="DescriptionOfTheEventInVerbalProcess"
-                       className="content">DescriptionOfTheEventInVerbalProcess:</label>
+                       className="content">Vă rugăm să prezentaţi situaţia descrisă din procesul verbal:</label>
                 <input
                     type="text"
                     id="DescriptionOfTheEventInVerbalProcess"
@@ -513,7 +500,7 @@ const FormComplaint = (user) => {
                     required
                 />
                 <label htmlFor="DescriptionOfTheEventInPersonalOpinion"
-                       className="content">DescriptionOfTheEventInPersonalOpinion:</label>
+                       className="content">Vă rugăm să prezentaţi situaţia de fapt din punctul dumneavoastră de vedere, mai ales dacă e diferită de de cea prezentată de agentul constatator:</label>
                 <input
                     type="text"
                     id="DescriptionOfTheEventInPersonalOpinion"
@@ -523,7 +510,8 @@ const FormComplaint = (user) => {
                     value={DescriptionOfTheEventInPersonalOpinion}
                     required
                 />
-                <label htmlFor="LawNumberEvent" className="content">LawNumberEvent:</label>
+                <label  className="content"> Vă rugăm să completaţi articolele şi norma legală din procesul verbal cu privire la fapta comisă</label><br/>
+                <label htmlFor="LawNumberEvent" className="content">Articolul:</label>
                 <input
                     type="text"
                     id="LawNumberEvent"
@@ -533,7 +521,7 @@ const FormComplaint = (user) => {
                     value={LawNumberEvent}
                     required
                 />
-                <label htmlFor="LawParagraphEvent" className="content">LawParagraphEvent:</label>
+                <label htmlFor="LawParagraphEvent" className="content">Aliniatul:</label>
                 <input
                     type="text"
                     id="LawParagraphEvent"
@@ -543,7 +531,7 @@ const FormComplaint = (user) => {
                     value={LawParagraphEvent}
                     required
                 />
-                <label htmlFor="LawRuleEvent" className="content">LawRuleEvent:</label>
+                <label htmlFor="LawRuleEvent" className="content">norma legală în care sunt prevăzute faptele contravenţionale:</label>
                 <input
                     type="text"
                     id="LawRuleEvent"
@@ -553,7 +541,8 @@ const FormComplaint = (user) => {
                     value={LawRuleEvent}
                     required
                 />
-                <label htmlFor="LawNumberPay" className="content">LawNumberPay:</label>
+                <label  className="content">Vă rugăm să completaţi articolele şi norma legală din procesul verbal cu privire la sancţiunea aplicată</label><br/>
+                <label htmlFor="LawNumberPay" className="content">Articol:</label>
                 <input
                     type="text"
                     id="LawNumberPay"
@@ -563,7 +552,7 @@ const FormComplaint = (user) => {
                     value={LawNumberPay}
                     required
                 />
-                <label htmlFor="LawParagraphPay" className="content">LawParagraphPay:</label>
+                <label htmlFor="LawParagraphPay" className="content">Aliniat:</label>
                 <input
                     type="text"
                     id="LawParagraphPay"
@@ -573,7 +562,7 @@ const FormComplaint = (user) => {
                     value={LawParagraphPay}
                     required
                 />
-                <label htmlFor="LawRulePay" className="content">LawRulePay:</label>
+                <label htmlFor="LawRulePay" className="content">norma legală în care sunt prevăzute sancţiunile :</label>
                 <input
                     type="text"
                     id="LawRulePay"
@@ -583,7 +572,7 @@ const FormComplaint = (user) => {
                     value={LawRulePay}
                     required
                 />
-                <label htmlFor="Witnesses" className="content">Witnesses:</label>
+                <label htmlFor="Witnesses" className="content">Aveţi martori care să fie audiaţi de instanţa de judecată şi care sunt pregatiţi să vă probeze nevinovaţia?:</label>
                 <select
                     id="Witnesses"
                     name="Witnesses"
@@ -592,13 +581,14 @@ const FormComplaint = (user) => {
                     value={Witnesses}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="DA">DA</option>
                     <option value="NU">NU</option>
                 </select>
 
-                <label htmlFor="WitnessesData" className="content">WitnessesData:</label>
-                <input
+                <label htmlFor="WitnessesData" className="content">Nume, adresă și număr de telefon martori:</label>
+                <textarea
+                    rows="4"
                     type="text"
                     id="WitnessesData"
                     name="WitnessesData"
@@ -606,9 +596,10 @@ const FormComplaint = (user) => {
                     autoComplete="off"
                     onChange={(e) => setWitnessesData(e.target.value)}
                     value={WitnessesData}
+                    placeholder={`Nume: ... ; Adresa: ... ; Telefon: ... ;\nNume: ... ; Adresa: ... ; Telefon: ... ;\nNume: ... ; Adresa: ... ; Telefon: ... ;\nNume: ... ; Adresa: ... ; Telefon: ... ;`}
                     required
                 />
-                <label htmlFor="Judge" className="content">Judge:</label>
+                <label htmlFor="Judge" className="content">Doriţi să vă prezentaţi la sedinţele de judecată sau doriţi judecarea cererii în lipsă?:</label>
                 <select
                     id="Judge"
                     name="Judge"
@@ -617,7 +608,7 @@ const FormComplaint = (user) => {
                     value={Judge}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="Doresc să particip la şedinţele de judecată">Doresc să particip la şedinţele de
                         judecată
                     </option>
@@ -626,7 +617,7 @@ const FormComplaint = (user) => {
                     </option>
                 </select>
 
-                <label htmlFor="Lawyer" className="content">Lawyer:</label>
+                <label htmlFor="Lawyer" className="content">Doriţi să fiţi asistat de un avocat în sala de judecată?:</label>
                 <select
                     id="Lawyer"
                     name="Lawyer"
@@ -635,11 +626,11 @@ const FormComplaint = (user) => {
                     value={Lawyer}
                     required
                 >
-                    <option value="">Select an option</option>
+                    <option value="">Selectare</option>
                     <option value="DA">DA</option>
                     <option value="NU">NU</option>
                 </select>
-                <label htmlFor="LawRulePay" className="content">Title:</label>
+                <label htmlFor="LawRulePay" className="content">Titlu formular (pentru al găsii mai ușor în listă):</label>
                 <input
                     type="text"
                     id="LawRulePay"
@@ -649,7 +640,7 @@ const FormComplaint = (user) => {
                     value={Title}
                     required
                 />
-                <label htmlFor="Accept" className="content">Accept:</label>
+                <label htmlFor="Accept" className="content">Menţionez că am citit şi sunt de acord cu termenii şi condiţiile prezentei aplicaţii:</label>
                 <input
                     type="text"
                     id="Accept"
@@ -663,10 +654,10 @@ const FormComplaint = (user) => {
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                     {errMsg}
                 </p>
-                <button className="btn">Submit</button>
+                <button className="btn">Trimite</button>
 
                 <br/><label className="content">Taxa timbru:</label>
-                <br/><label className="content">$13.99</label>
+                <br/><label className="content">13.99</label>
                 <PayPalScriptProvider options={{"client-id": clientId}}>
                     <PayPalButtons createOrder={createOrder} onApprove={onApprove}/>
                 </PayPalScriptProvider>

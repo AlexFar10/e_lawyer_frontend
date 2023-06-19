@@ -33,7 +33,7 @@ const UserData = () => {
                     <thead>
                     <tr>
                         <th className="content"><h3>Titlu</h3></th>
-                        <th className="content"><h3>Observatii</h3></th>
+                        <th className="content"><h3>Observații</h3></th>
                         <th className="content"><h3>Status</h3></th>
                         <th className="content"><h3>Gestionare</h3></th>
                     </tr>
@@ -47,7 +47,7 @@ const UserData = () => {
                             <td className="content">
                                 <Link to={`/edit/${complaint._id}`} activeclassname="current"><button className="btn" >Editare</button></Link>
                                 <Link to={`/view/${complaint._id}`} activeclassname="current"><button className="btn" >Vizualizare</button></Link>
-                                <button className="btn" onClick={() => deleteComplaint(complaint._id)}>Delete</button>
+                                <button className="btn" onClick={() => deleteComplaint(complaint._id)}>Ștergere</button>
 
 
                             </td>

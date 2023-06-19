@@ -34,7 +34,7 @@ const UserData = () => {
                         <th className="content"><h3>Prenume</h3></th>
                         <th className="content"><h3>Email</h3></th>
                         <th className="content"><h3>Rol</h3></th>
-                        <th className="content"><h3>Sterge</h3></th>
+                        <th className="content"><h3>Șterge</h3></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@ const UserData = () => {
                             <td className="content"><label>{user.Email}</label></td>
                             <td className="content"><label>{user.Role}</label></td>
                             <td className="content">
-                                <button className="btn" onClick={() => deleteUser(user._id)}>Delete</button>
+                                <button className="btn" onClick={() => deleteUser(user._id)}>Ștergere</button>
                             </td>
                         </tr>
                     ))}

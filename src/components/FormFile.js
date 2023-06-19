@@ -37,7 +37,7 @@ const FormFile = ({user_Id}) => {
         <section className="book" id="book">
             <div className="row">
                 <form onSubmit={handleSubmit}>
-                    <label className="content">Introducere fisiere:</label>
+                    <label className="content">Introducere fișiere:</label>
                     <input
                         className="box"
                         type="file"
@@ -46,7 +46,7 @@ const FormFile = ({user_Id}) => {
                             setFilelist(event.target.files);
                         }}
                     />
-                    <label className="content">Observatii:</label>
+                    <label className="content">Observații:</label>
                     <input
                         className="box"
                         type="text"

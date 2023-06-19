@@ -10,10 +10,7 @@ class NavBar extends Component {
                     <a href="#" className="logo"> <i><GoLaw/></i> E-lawyer</a>
 
                     <nav className="navbar">
-                        <a href="#home">Acasă</a>
-                        <a href="#about">Despre noi</a>
-                        <a href="#blogs">Contact</a>
-                        <a href="#blogs">Contul tău</a>
+                        <a href="#">Avocatul tău digital</a>
                     </nav>
 
                     <div id="menu-btn" className="fas fa-bars"></div>
