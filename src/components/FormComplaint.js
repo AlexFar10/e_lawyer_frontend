@@ -42,6 +42,7 @@ const FormComplaint = (user) => {
     const [Judge, setJudge] = useState('');
     const [Lawyer, setLawyer] = useState('');
     const [Title, setTitle] = useState('');
+    const [Pay, setPay] = useState('');
 
     const [CIseries, setCIseries] = useState('');
     const [CInr, setCInr] = useState('');
@@ -58,6 +59,8 @@ const FormComplaint = (user) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+
         try {
             const response = await axios.post(FORM_URL,
                 {
@@ -103,7 +106,7 @@ const FormComplaint = (user) => {
                     Ap : Ap,
                     Accept : Accept,
                     WitnessesData : WitnessesData,
-                    PoliceAdr : PoliceAdr,
+                    PoliceAdr : PoliceAdr ,
 
                 })
             ;
@@ -174,7 +177,6 @@ const FormComplaint = (user) => {
             purchase_units: [
                 {
                     amount: {
-                        currency_code: "RON",
                         value: "13.99"
                     }
                 }
@@ -184,6 +186,7 @@ const FormComplaint = (user) => {
     const onApprove = async (data, actions) => {
         const details = await actions.order.capture();
         const name = details.payer.name.given_name;
+        setPay('DA')
         alert(`Transaction completed by ${name}`);
     };
 
@@ -426,8 +429,8 @@ const FormComplaint = (user) => {
                     required
                 >
                     <option value="">Selectare</option>
-                    <option value="PRIN INMANARE LA FATA LOCULUI">PRIN INMABARE LA FATA LOCULUI</option>
-                    <option value="PRIN POSTA">PRIN POSTA</option>
+                    <option value="PRIN ÎNMÂNARE LA FAȚA LOCULUI">PRIN ÎNMÂNARE LA FAȚA LOCULUI</option>
+                    <option value="PRIN POȘTĂ">PRIN POȘTĂ</option>
                 </select>
                 <label htmlFor="DateOfHandingOutVerbalProcess"
                        className="content">Data înmânării/comunicării procesului verbal:</label>
@@ -475,17 +478,16 @@ const FormComplaint = (user) => {
                 >
                     <option value="">Selectare</option>
                     <option
-                        value="Doresc anularea amenzi pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea">Doresc
+                        value="Doresc anularea amenzii pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea">
+                        Doresc anularea amenzii pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea
                     </option>
                     <option
-                        value="Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.">Doresc
-                        preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere
-                        contravenţională.
+                        value="Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.">
+                        Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.
                     </option>
                     <option
-                        value="Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele">Doresc
-                        reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se
-                        putea aplica sau este disproporţionată în raport de veniturile mele
+                        value="Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele">
+                        Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele
                     </option>
                 </select>
                 <label htmlFor="DescriptionOfTheEventInVerbalProcess"
@@ -642,25 +644,30 @@ const FormComplaint = (user) => {
                 />
                 <label htmlFor="Accept" className="content">Menţionez că am citit şi sunt de acord cu termenii şi condiţiile prezentei aplicaţii:</label>
                 <input
-                    type="text"
+                    type="checkbox"
                     id="Accept"
                     name="Accept"
                     className="box"
                     autoComplete="off"
-                    onChange={(e) => setAccept(e.target.value)}
-                    value={Accept}
+                    onChange={(e) => setAccept(e.target.checked)}
+                    checked={Accept}
                     required
                 />
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
                     {errMsg}
                 </p>
-                <button className="btn">Trimite</button>
 
                 <br/><label className="content">Taxa timbru:</label>
                 <br/><label className="content">13.99</label>
                 <PayPalScriptProvider options={{"client-id": clientId}}>
                     <PayPalButtons createOrder={createOrder} onApprove={onApprove}/>
                 </PayPalScriptProvider>
+
+                <button  type="submit"  onClick={handleSubmit} className='btn'>
+                    Trimite
+                </button>
+
+
             </form>
 
 

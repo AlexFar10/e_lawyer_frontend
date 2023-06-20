@@ -431,9 +431,9 @@ const EditComplaint = () => {
                             placeholder={complaint.HandingOutVerbalProcess}
                             required
                         >
-                            <option value="">Select an option</option>
-                            <option value="PRIN INMANARE LA FATA LOCULUI">PRIN INMABARE LA FATA LOCULUI</option>
-                            <option value="PRIN POSTA">PRIN POSTA</option>
+                            <option value="">Selectare</option>
+                            <option value="PRIN ÎNMÂNARE LA FAȚA LOCULUI">PRIN ÎNMÂNARE LA FAȚA LOCULUI</option>
+                            <option value="PRIN POȘTĂ">PRIN POȘTĂ</option>
                         </select>
                         <label htmlFor="DateOfHandingOutVerbalProcess"
                                className="content">Data înmânării/comunicării procesului verbal:</label>
@@ -485,17 +485,16 @@ const EditComplaint = () => {
                         >
                             <option value="">Selectare</option>
                             <option
-                                value="Doresc anularea amenzi pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea">Doresc
+                                value="Doresc anularea amenzii pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea">
+                                Doresc anularea amenzii pentru că sunt nevinovat iar amenda este abuzivă. Am documente şi martori care să ateste nevinovaţia mea
                             </option>
                             <option
-                                value="Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.">Doresc
-                                preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere
-                                contravenţională.
+                                value="Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.">
+                                Doresc preschimbarea amenzii în avertisment pentru că deşi sunt vinovat, sunt la prima abatere contravenţională.
                             </option>
                             <option
-                                value="Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele">Doresc
-                                reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se
-                                putea aplica sau este disproporţionată în raport de veniturile mele
+                                value="Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele">
+                                Doresc reducerea cuantumului amenzii pentru că amenda primită reprezintă maximul din cât mi se putea aplica sau este disproporţionată în raport de veniturile mele
                             </option>
                         </select>
                         <label htmlFor="DescriptionOfTheEventInVerbalProcess"
