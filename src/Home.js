@@ -14,6 +14,7 @@ import NewPwd from "./components/NewPwd";
 import WordDoc from "./components/WordDoc";
 import Form from "./Form";
 import LawyerComplaint from "./components/LawyerComplaint";
+import LawyerFile from "./components/LawyerFile";
 
 class Home extends Component {
     render() {
@@ -29,6 +30,7 @@ class Home extends Component {
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/reset" element={<ResetPwd/>}/>
                         <Route path="/usercomplaint/:email" element={<LawyerComplaint/>}/>
+                        <Route path="/userfile/:id" element={<LawyerFile/>}/>
                         <Route path="/edit/:complaintId" element={<EditComplaint/>}/>
                         <Route path="/view/:complaintId/:complaintPoliceInstitution" element={<ViewComplaint/>}/>
                         <Route path="/reset-password/:email/:token" element={<NewPwd/>}/>
